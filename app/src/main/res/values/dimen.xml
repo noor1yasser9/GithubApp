@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    // Shape Sizes
+    <dimen name="mainToolbarSize">116dp</dimen>
+    <dimen name="subToolbarSize">100dp</dimen>
+    <dimen name="size_card_100">100dp</dimen>
+    <dimen name="size_card_120">120dp</dimen>
+    <dimen name="size_80dp">80dp</dimen>
+    <dimen name="size_56dp">56dp</dimen>
+    <dimen name="size_24dp">24dp</dimen>
+    <dimen name="size_36dp">36dp</dimen>
+
+    //margin size
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="margin_14">14dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
+    <dimen name="margin_64">64dp</dimen>
+
+    // Font size
+    <dimen name="font_16">16sp</dimen>
+    <dimen name="font_18">18sp</dimen>
+    <dimen name="font_10">10sp</dimen>
+    <dimen name="font_12">12sp</dimen>
+    <dimen name="font_14">14sp</dimen>
+    <dimen name="font_20">20sp</dimen>
+    <dimen name="font_24">24sp</dimen>
+    <dimen name="font_28">28sp</dimen>
+
+    // Padding size
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+
+    // Elevation size
+    <dimen name="elevation_2">2dp</dimen>
+    <dimen name="elevation_4">4dp</dimen>
+    <dimen name="elevation_8">8dp</dimen>
+
+    // Radius size
+    <dimen name="radius_4">4dp</dimen>
+    <dimen name="radius_8">8dp</dimen>
+
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+</resources>
