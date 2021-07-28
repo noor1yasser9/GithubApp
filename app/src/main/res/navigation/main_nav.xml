@@ -7,5 +7,14 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.noor.yasser.ps.githubapp.ui.fragments.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.noor.yasser.ps.githubapp.ui.fragments.HomeFragment"
+        android:label="HomeFragment" />
+
 </navigation>
