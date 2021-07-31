@@ -43,6 +43,7 @@
     // Radius size
     <dimen name="radius_4">4dp</dimen>
     <dimen name="radius_8">8dp</dimen>
+    <dimen name="radius_1000">1000dp</dimen>
 
 
     <dimen name="activity_horizontal_margin">16dp</dimen>

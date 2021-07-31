@@ -2,8 +2,9 @@ package com.noor.yasser.ps.githubapp.model
 
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
-import com.qingmei2.sample.utils.fromJson
-import com.qingmei2.sample.utils.toJson
+import com.noor.yasser.ps.githubapp.utils.fromJson
+import com.noor.yasser.ps.githubapp.utils.toJson
+
 
 @Entity(tableName = "user_repos")
 @TypeConverters(ReposPersistentConverter::class)
