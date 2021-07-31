@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#000a12</color>
     <color name="colorAccent">#263238</color>
     <color name="primaryLightColor">#cfd8dc</color>
+    <color name="primaryLightColorTrue">#F7FCFF</color>
 
     <color name="secondaryColor">#455a64</color>
     <color name="secondaryLightColor">#718792</color>
@@ -28,4 +29,10 @@
     <color name="color_language_c">#555555</color>
     <color name="color_language_ruby">#701516</color>
     <color name="color_language_other">#455a64</color>
+
+
+    <color name="dark_pri">#1D2530</color>
+    <color name="dark_pri_100">#161B22</color>
+
+
 </resources>

@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:textColorSecondary">@color/primaryLightColor</item>
+        <item name="android:background">@color/dark_pri</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>
