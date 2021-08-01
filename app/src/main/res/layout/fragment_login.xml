@@ -73,6 +73,7 @@
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:text="@string/login_sign_in"
+            android:backgroundTint="@color/dark_pri_100"
             android:layout_marginTop="@dimen/margin_32"
             android:textAllCaps="false"
             android:textColor="@color/white"
