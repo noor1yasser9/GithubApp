@@ -30,17 +30,17 @@ class MainActivity : AppCompatActivity() {
             navController
         )
 
-        mBinding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
-//            when (item.itemId) {
-//                R.id.profileFragment -> {
-//                    navController.navigate(R.id.profileFragment, null, getNavOptions())
-//                }
-//                else -> {
-//                    navController.navigate(item.itemId, null, null)
-//                }
-//            }
-            true
-        }
+//        mBinding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+////            when (item.itemId) {
+////                R.id.profileFragment -> {
+////                    navController.navigate(R.id.profileFragment, null, getNavOptions())
+////                }
+////                else -> {
+////                    navController.navigate(item.itemId, null, null)
+////                }
+////            }
+//            true
+//        }
     }
 
     private fun getNavOptions(): NavOptions? {
