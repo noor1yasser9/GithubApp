@@ -11,5 +11,7 @@
     <string name="login_hint_password">admin321</string>
     <string name="login_sign_in">Sign in</string>
     <string name="login_sign_in_tips">This page is a login simulation, as long as you fill in a valid code in local.properties, you can login normally</string>
+    <string name="start">Start</string>
+    <string name="long_text"><![CDATA[Masterful Mobile Developer 💥 & UI|UX Designer 🚀 | Kotlin 💥 | Java ⚡ | Dart 🌟]]></string>
 
 </resources>

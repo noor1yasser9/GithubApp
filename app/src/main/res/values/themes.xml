@@ -7,7 +7,14 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:textColorSecondary">@color/primaryLightColor</item>
-        <item name="android:background">@color/dark_pri</item>
+        <item name="android:backgroundTint">@color/dark_pri</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="TransparentText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#00000000</item>
+    </style>
+
 </resources>

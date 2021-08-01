@@ -16,5 +16,9 @@
         android:id="@+id/homeFragment"
         android:name="com.noor.yasser.ps.githubapp.ui.fragments.HomeFragment"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.noor.yasser.ps.githubapp.ui.fragments.ProfileFragment"
+        android:label="ProfileFragment" />
 
 </navigation>
