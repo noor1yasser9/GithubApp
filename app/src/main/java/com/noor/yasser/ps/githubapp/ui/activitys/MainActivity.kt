@@ -2,6 +2,7 @@ package com.noor.yasser.ps.githubapp.ui.activitys
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -30,17 +31,19 @@ class MainActivity : AppCompatActivity() {
             navController
         )
 
-//        mBinding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
-////            when (item.itemId) {
-////                R.id.profileFragment -> {
-////                    navController.navigate(R.id.profileFragment, null, getNavOptions())
-////                }
-////                else -> {
-////                    navController.navigate(item.itemId, null, null)
-////                }
-////            }
-//            true
-//        }
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.homeFragment, R.id.profileFragment -> {
+                    mBinding.bottomNavigation.isVisible = true
+                }
+                else -> {
+                    mBinding.bottomNavigation.isVisible = false
+
+                }
+            }
+
+        }
+
     }
 
     private fun getNavOptions(): NavOptions? {
