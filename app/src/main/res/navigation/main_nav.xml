@@ -17,8 +17,16 @@
         android:name="com.noor.yasser.ps.githubapp.ui.fragments.HomeFragment"
         android:label="HomeFragment" />
     <fragment
-        android:id="@+id/nav_profile"
+        android:id="@+id/profileFragment"
         android:name="com.noor.yasser.ps.githubapp.ui.fragments.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_nav_profile_to_followerSIngFragment"
+            app:destination="@id/followerSIngFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/followerSIngFragment"
+        android:name="com.noor.yasser.ps.githubapp.ui.fragments.followers.FollowerSIngFragment"
+        android:label="FollowerSIngFragment" />
 
 </navigation>

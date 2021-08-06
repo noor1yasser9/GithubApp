@@ -35,7 +35,7 @@
             android:background="@drawable/bottom_navigation_background"
             android:elevation="@dimen/elevation_2"
             android:padding="3sp"
-            tools:visibility="visible"
+            android:visibility="gone"
             app:itemIconTint="@drawable/bottom_navigation_color_selector"
             app:itemTextColor="@drawable/bottom_navigation_color_selector"
             app:labelVisibilityMode="selected"

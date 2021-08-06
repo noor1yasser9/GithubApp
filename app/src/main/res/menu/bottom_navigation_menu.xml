@@ -9,7 +9,7 @@
         android:icon="@mipmap/ic_home_search"
         android:title="@string/main_nav_repos" />
     <item
-        android:id="@+id/nav_profile"
+        android:id="@+id/profileFragment"
         android:icon="@mipmap/ic_nav_mine"
         android:title="@string/main_nav_profile" />
 </menu>

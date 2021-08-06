@@ -9,15 +9,15 @@
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
+		android:layout_marginHorizontal="@dimen/margin_24"
+
 		android:layout_height="wrap_content">
 
 		<androidx.constraintlayout.widget.ConstraintLayout
 			android:id="@+id/btnAvatar"
 			android:layout_width="0dp"
 			android:layout_height="20dp"
-			android:layout_marginLeft="16dp"
 			android:layout_marginTop="16dp"
-			android:layout_marginRight="16dp"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent">
@@ -30,7 +30,7 @@
 				app:layout_constraintBottom_toBottomOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toTopOf="parent"
-				tools:src="@mipmap/ic_github" />
+				android:src="@mipmap/ic_github" />
 
 			<TextView
 				android:id="@+id/tvOwnerName"
@@ -44,7 +44,7 @@
 				app:layout_constraintBottom_toBottomOf="parent"
 				app:layout_constraintStart_toEndOf="@+id/ivAvatar"
 				app:layout_constraintTop_toTopOf="parent"
-				tools:text="qingmei2" />
+				android:text="qingmei2" />
 
 			<de.hdodenhof.circleimageview.CircleImageView
 				android:id="@+id/ivLanguageColor"
@@ -54,7 +54,7 @@
 				app:layout_constraintBottom_toBottomOf="@+id/tvLanguage"
 				app:layout_constraintEnd_toStartOf="@+id/tvLanguage"
 				app:layout_constraintTop_toTopOf="@+id/tvLanguage"
-				tools:src="@color/color_language_kotlin" />
+				android:src="@color/color_language_kotlin" />
 
 			<TextView
 				android:id="@+id/tvLanguage"
@@ -65,7 +65,7 @@
 				app:layout_constraintBottom_toBottomOf="parent"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintTop_toTopOf="parent"
-				tools:text="Kotlin" />
+				android:text="Kotlin" />
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -83,7 +83,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/btnAvatar"
-			tools:text="qingmei2/MVVM-Rhine" />
+			android:text="qingmei2/MVVM-Rhine" />
 
 		<TextView
 			android:id="@+id/tvRepoDesc"
@@ -97,7 +97,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/tvRepoName"
-			tools:text="The MVVM Architecture in Android（MVVM+Jetpack架构的Github客户端，开发中）." />
+			android:text="The MVVM Architecture in Android（MVVM+Jetpack架构的Github）." />
 
 		<androidx.constraintlayout.widget.ConstraintLayout
 			android:id="@+id/clIcons"
@@ -155,7 +155,7 @@
 				app:layout_constraintBottom_toBottomOf="@+id/ivIssue"
 				app:layout_constraintStart_toEndOf="@+id/ivIssue"
 				app:layout_constraintTop_toTopOf="@+id/ivIssue"
-				tools:text="6" />
+				android:text="6" />
 
 			<ImageView
 				android:id="@+id/ivFork"
@@ -179,7 +179,7 @@
 				app:layout_constraintBottom_toBottomOf="@+id/ivFork"
 				app:layout_constraintStart_toEndOf="@+id/ivFork"
 				app:layout_constraintTop_toTopOf="@+id/ivFork"
-				tools:text="88" />
+				android:text="88" />
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
