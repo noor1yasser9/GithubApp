@@ -26,6 +26,7 @@
     <color name="color_language_python">#3572A5</color>
     <color name="color_language_cplus">#F34B7D</color>
     <color name="color_language_kotlin">#F18E33</color>
+    <color name="color_language_Dart">#2196F3</color>
     <color name="color_language_c">#555555</color>
     <color name="color_language_ruby">#701516</color>
     <color name="color_language_other">#455a64</color>

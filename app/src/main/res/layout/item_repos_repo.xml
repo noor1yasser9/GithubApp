@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.noor.yasser.ps.githubapp.model.repo.RepositoryItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,25 +24,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="qingmei2/MVVM-Rhine"
+            android:text="@{data.fullName}"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="qingmei2/MVVM-Rhine" />
 
         <TextView
             android:id="@+id/tvRepoDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_8"
-            android:text="The MVVM Architecture in Android（MVVM+Jetpack架构的Github）."
+            android:text='@{data.description==null?"":data.description}'
             android:textColor="@color/secondaryTextGray"
             android:textSize="12sp"
+            android:visibility="@{data.description==null?View.GONE:View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRepoName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvRepoName"
+            tools:text="The MVVM Architecture in Android（MVVM+Jetpack架构的Github）." />
 
         <ImageView
             android:id="@+id/ivStar"
@@ -56,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
+            android:text='@{String.valueOf(data.stargazersCount)}'
             android:textColor="@color/secondaryTextGray"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivStar"
@@ -80,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:text="6"
+            android:text='@{String.valueOf(data.openIssuesCount)}'
             android:textColor="@color/secondaryTextGray"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivIssue"
@@ -104,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:text="88"
+            android:text='@{String.valueOf(data.forksCount)}'
             android:textColor="@color/secondaryTextGray"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivFork"
@@ -114,10 +123,10 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivLanguageColor"
+            setColor="@{data.language}"
             android:layout_width="7dp"
             android:layout_height="7dp"
             android:layout_marginEnd="4dp"
-            android:src="@color/color_language_kotlin"
             app:layout_constraintEnd_toStartOf="@+id/tvLanguage"
             app:layout_constraintTop_toTopOf="@+id/ivStar" />
 
@@ -125,7 +134,7 @@
             android:id="@+id/tvLanguage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kotlin"
+            android:text="@{data.language}"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivLanguageColor"
