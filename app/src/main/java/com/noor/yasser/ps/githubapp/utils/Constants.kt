@@ -8,3 +8,5 @@ const val KET_AUTH = "Authorization"
 const val VALUE_AUTH = "mau API KEY? Tonton video tutorialnya ya^^"
 
 val DEBUG = Boolean.parseBoolean("true")
+
+val POSITION_FOLLOWRES = "positionFollowers"
