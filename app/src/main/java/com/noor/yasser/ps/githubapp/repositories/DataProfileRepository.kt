@@ -1,7 +1,6 @@
 package com.noor.yasser.ps.githubapp.repositories
 
-import android.util.Log
-import com.noor.yasser.ps.githubapp.network.DataInterface
+import com.noor.yasser.ps.githubapp.network.DataProfileInterface
 import com.noor.yasser.ps.githubapp.utils.ResultResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DataRepository @Inject constructor(val dataInterface: DataInterface) {
+class DataProfileRepository @Inject constructor(val dataInterface: DataProfileInterface) {
 
     private val userDataMutableStateFlow: MutableStateFlow<ResultResponse<Any>> =
         MutableStateFlow(ResultResponse.loading(""))
@@ -21,6 +20,8 @@ class DataRepository @Inject constructor(val dataInterface: DataInterface) {
     private val userFollowersMutableStateFlow: MutableStateFlow<ResultResponse<Any>> =
         MutableStateFlow(ResultResponse.loading(""))
     private val userFollowingMutableStateFlow: MutableStateFlow<ResultResponse<Any>> =
+        MutableStateFlow(ResultResponse.loading(""))
+    private val userRepoMutableStateFlow: MutableStateFlow<ResultResponse<Any>> =
         MutableStateFlow(ResultResponse.loading(""))
 
 
@@ -33,6 +34,9 @@ class DataRepository @Inject constructor(val dataInterface: DataInterface) {
                         if (it.message == null) {
                             userDataMutableStateFlow.emit(ResultResponse.success(it))
                             isExists(true)
+                            userFollowers(username)
+                            userFollowing(username)
+                            userRepo(username)
                         } else {
                             isExists(false)
                         }
@@ -64,7 +68,6 @@ class DataRepository @Inject constructor(val dataInterface: DataInterface) {
                 val response = dataInterface.userFollowers(username)
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        Log.e("ttttttttt", it.toString())
                         userFollowersMutableStateFlow.emit(ResultResponse.success(it))
                     }
                 } else {
@@ -91,7 +94,6 @@ class DataRepository @Inject constructor(val dataInterface: DataInterface) {
                 val response = dataInterface.userFollowing(username)
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        Log.e("ttttttttt", it.toString())
                         userFollowingMutableStateFlow.emit(ResultResponse.success(it))
                     }
                 } else {
@@ -112,7 +114,34 @@ class DataRepository @Inject constructor(val dataInterface: DataInterface) {
         }
     }
 
+    fun userRepo(username: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = dataInterface.userRepo(username)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        userRepoMutableStateFlow.emit(ResultResponse.success(it))
+                    }
+                } else {
+                    userRepoMutableStateFlow.emit(
+                        ResultResponse.error(
+                            "Ooops: ${response.errorBody()}",
+                            response
+                        )
+                    )
+                }
+            } catch (e: HttpException) {
+                e.printStackTrace()
+                userRepoMutableStateFlow.emit(ResultResponse.error("Ooops: ${e.message()}", e))
+            } catch (t: Throwable) {
+                t.printStackTrace()
+                userRepoMutableStateFlow.emit(ResultResponse.error("Ooops: ${t.message}", t))
+            }
+        }
+    }
+
     fun getUserDataStateFlow(): StateFlow<ResultResponse<Any>> = userDataMutableStateFlow
     fun getUserFollowersStateFlow(): StateFlow<ResultResponse<Any>> = userFollowersMutableStateFlow
     fun getUserFollowingStateFlow(): StateFlow<ResultResponse<Any>> = userFollowingMutableStateFlow
+    fun getUserRepoStateFlow(): StateFlow<ResultResponse<Any>> = userRepoMutableStateFlow
 }
