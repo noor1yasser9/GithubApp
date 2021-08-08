@@ -14,8 +14,12 @@ import com.noor.yasser.ps.githubapp.R
 import com.noor.yasser.ps.githubapp.adapters.GenericAdapter
 import com.noor.yasser.ps.githubapp.adapters.ViewPagerAdapter
 import com.noor.yasser.ps.githubapp.databinding.FragmentProfileBinding
+import com.noor.yasser.ps.githubapp.model.FollowersItem
 import com.noor.yasser.ps.githubapp.model.UserModel
+import com.noor.yasser.ps.githubapp.model.repo.RepositoryItem
 import com.noor.yasser.ps.githubapp.ui.dialogs.IndeterminateProgressDialog
+import com.noor.yasser.ps.githubapp.utils.MemberItemDecoration
+import com.noor.yasser.ps.githubapp.utils.POSITION_FOLLOWRES
 import com.noor.yasser.ps.githubapp.utils.ResultResponse
 import com.noor.yasser.ps.githubapp.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,8 +39,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
     }
 
     private val mAdapter by lazy {
-        GenericAdapter(R.layout.item_repos_repo, BR._all, this)
+        GenericAdapter(R.layout.item_repos_repo, BR.data, this)
     }
+    private val mBundle by lazy { Bundle() }
+
+
     private lateinit var userModel: UserModel
     private var loadingDialog: IndeterminateProgressDialog? = null
 
@@ -49,13 +56,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mBinding.rcData.adapter = mAdapter
+        mBinding.rcData.apply {
+            adapter = mAdapter
+            addItemDecoration(MemberItemDecoration())
+        }
 
         mBinding.groupFollowers.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_profile_to_followerSIngFragment)
+            mBundle.putInt(POSITION_FOLLOWRES, 1)
+            findNavController().navigate(R.id.action_nav_profile_to_followerSIngFragment,mBundle)
         }
         mBinding.groupFollowing.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_profile_to_followerSIngFragment)
+            mBundle.putInt(POSITION_FOLLOWRES, 0)
+            findNavController().navigate(R.id.action_nav_profile_to_followerSIngFragment,mBundle)
         }
 
         lifecycleScope.launchWhenStarted {
@@ -77,10 +89,27 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
             }
         }
 
+        lifecycleScope.launchWhenStarted {
+            mViewModel.getUserRepoStateFlow().collect {
+                withContext(Dispatchers.Main) {
+                    when (it.status) {
+                        ResultResponse.Status.LOADING -> {
+                        }
+                        ResultResponse.Status.SUCCESS -> {
+                            mAdapter.data = it.data as List<RepositoryItem>
+                        }
+                        ResultResponse.Status.ERROR -> {
+                        }
+                        else -> {
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     override fun onClickItem(itemViewModel: Any, type: Int) {
-        TODO("Not yet implemented")
     }
 
 

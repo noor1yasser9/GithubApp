@@ -13,6 +13,7 @@ import com.noor.yasser.ps.githubapp.databinding.FragmentProfileBinding
 import com.noor.yasser.ps.githubapp.databinding.FragmentRecyclerBinding
 import com.noor.yasser.ps.githubapp.model.FollowersItem
 import com.noor.yasser.ps.githubapp.ui.dialogs.IndeterminateProgressDialog
+import com.noor.yasser.ps.githubapp.utils.MemberItemDecoration
 import com.noor.yasser.ps.githubapp.utils.ResultResponse
 import com.noor.yasser.ps.githubapp.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +45,10 @@ class FollowingFragment : Fragment(), GenericAdapter.OnListItemViewClickListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mBinding.rcData.adapter = mAdapter
+        mBinding.rcData.apply {
+            adapter = mAdapter
+            addItemDecoration(MemberItemDecoration())
+        }
         lifecycleScope.launchWhenStarted {
             mViewModel.getUserFollowingStateFlow().collect {
                 withContext(Dispatchers.Main) {
