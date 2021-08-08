@@ -65,7 +65,7 @@ class LoginFragment : Fragment() {
 
     }
 
-    fun getInstance(): IndeterminateProgressDialog {
+    private fun getInstance(): IndeterminateProgressDialog {
         if (loadingDialog == null)
             loadingDialog = IndeterminateProgressDialog()
         return loadingDialog!!;

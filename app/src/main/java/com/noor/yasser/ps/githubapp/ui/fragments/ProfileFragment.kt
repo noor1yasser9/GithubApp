@@ -15,6 +15,7 @@ import com.noor.yasser.ps.githubapp.adapters.GenericAdapter
 import com.noor.yasser.ps.githubapp.adapters.ViewPagerAdapter
 import com.noor.yasser.ps.githubapp.databinding.FragmentProfileBinding
 import com.noor.yasser.ps.githubapp.model.UserModel
+import com.noor.yasser.ps.githubapp.ui.dialogs.IndeterminateProgressDialog
 import com.noor.yasser.ps.githubapp.utils.ResultResponse
 import com.noor.yasser.ps.githubapp.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +37,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
     private val mAdapter by lazy {
         GenericAdapter(R.layout.item_repos_repo, BR._all, this)
     }
+    private lateinit var userModel: UserModel
+    private var loadingDialog: IndeterminateProgressDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,8 +65,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
                         ResultResponse.Status.LOADING -> {
                         }
                         ResultResponse.Status.SUCCESS -> {
-                            val data = it.data as UserModel
-                            mBinding.data = data
+                            userModel = it.data as UserModel
+                            mBinding.data = userModel
                         }
                         ResultResponse.Status.ERROR -> {
                         }
