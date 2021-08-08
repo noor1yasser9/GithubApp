@@ -17,11 +17,28 @@ class ProfileViewModel @Inject constructor(
 
     fun detailUser(username: String, isExists: (Boolean) -> Unit) {
         viewModelScope.launch {
-            dataRepository.detailUser(username,isExists)
+            dataRepository.detailUser(username, isExists)
+        }
+    }
+
+    fun userFollowers(username: String) {
+        viewModelScope.launch {
+            dataRepository.userFollowers(username)
+        }
+    }
+
+    fun userFollowing(username: String) {
+        viewModelScope.launch {
+            dataRepository.userFollowing(username)
         }
     }
 
     fun getUserDataStateFlow() =
         dataRepository.getUserDataStateFlow()
 
+    fun getUserFollowersStateFlow() =
+        dataRepository.getUserFollowersStateFlow()
+
+    fun getUserFollowingStateFlow() =
+        dataRepository.getUserFollowingStateFlow()
 }

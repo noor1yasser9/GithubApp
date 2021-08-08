@@ -1,5 +1,6 @@
 package com.noor.yasser.ps.githubapp.repositories
 
+import android.util.Log
 import com.noor.yasser.ps.githubapp.network.DataInterface
 import com.noor.yasser.ps.githubapp.utils.ResultResponse
 import kotlinx.coroutines.CoroutineScope
@@ -15,6 +16,11 @@ import javax.inject.Singleton
 class DataRepository @Inject constructor(val dataInterface: DataInterface) {
 
     private val userDataMutableStateFlow: MutableStateFlow<ResultResponse<Any>> =
+        MutableStateFlow(ResultResponse.loading(""))
+
+    private val userFollowersMutableStateFlow: MutableStateFlow<ResultResponse<Any>> =
+        MutableStateFlow(ResultResponse.loading(""))
+    private val userFollowingMutableStateFlow: MutableStateFlow<ResultResponse<Any>> =
         MutableStateFlow(ResultResponse.loading(""))
 
 
@@ -52,5 +58,61 @@ class DataRepository @Inject constructor(val dataInterface: DataInterface) {
         }
     }
 
+    fun userFollowers(username: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = dataInterface.userFollowers(username)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        Log.e("ttttttttt", it.toString())
+                        userFollowersMutableStateFlow.emit(ResultResponse.success(it))
+                    }
+                } else {
+                    userDataMutableStateFlow.emit(
+                        ResultResponse.error(
+                            "Ooops: ${response.errorBody()}",
+                            response
+                        )
+                    )
+                }
+            } catch (e: HttpException) {
+                e.printStackTrace()
+                userFollowersMutableStateFlow.emit(ResultResponse.error("Ooops: ${e.message()}", e))
+            } catch (t: Throwable) {
+                t.printStackTrace()
+                userFollowersMutableStateFlow.emit(ResultResponse.error("Ooops: ${t.message}", t))
+            }
+        }
+    }
+
+    fun userFollowing(username: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = dataInterface.userFollowing(username)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        Log.e("ttttttttt", it.toString())
+                        userFollowingMutableStateFlow.emit(ResultResponse.success(it))
+                    }
+                } else {
+                    userFollowingMutableStateFlow.emit(
+                        ResultResponse.error(
+                            "Ooops: ${response.errorBody()}",
+                            response
+                        )
+                    )
+                }
+            } catch (e: HttpException) {
+                e.printStackTrace()
+                userFollowingMutableStateFlow.emit(ResultResponse.error("Ooops: ${e.message()}", e))
+            } catch (t: Throwable) {
+                t.printStackTrace()
+                userFollowingMutableStateFlow.emit(ResultResponse.error("Ooops: ${t.message}", t))
+            }
+        }
+    }
+
     fun getUserDataStateFlow(): StateFlow<ResultResponse<Any>> = userDataMutableStateFlow
+    fun getUserFollowersStateFlow(): StateFlow<ResultResponse<Any>> = userFollowersMutableStateFlow
+    fun getUserFollowingStateFlow(): StateFlow<ResultResponse<Any>> = userFollowingMutableStateFlow
 }
