@@ -30,7 +30,7 @@ class GenericAdapter<T>(
         return GenericViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: GenericViewHolder<T>, position: Int) {
         try {
