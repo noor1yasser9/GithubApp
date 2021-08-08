@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -13,11 +14,20 @@ import com.noor.yasser.ps.githubapp.R
 import com.noor.yasser.ps.githubapp.adapters.GenericAdapter
 import com.noor.yasser.ps.githubapp.adapters.ViewPagerAdapter
 import com.noor.yasser.ps.githubapp.databinding.FragmentProfileBinding
+import com.noor.yasser.ps.githubapp.model.UserModel
+import com.noor.yasser.ps.githubapp.utils.ResultResponse
+import com.noor.yasser.ps.githubapp.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile),
     GenericAdapter.OnListItemViewClickListener<Any> {
+    @Inject
+    lateinit var mViewModel: ProfileViewModel
 
     private val mBinding by lazy {
         FragmentProfileBinding.inflate(layoutInflater)
@@ -44,6 +54,26 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
         mBinding.groupFollowing.setOnClickListener {
             findNavController().navigate(R.id.action_nav_profile_to_followerSIngFragment)
         }
+
+        lifecycleScope.launchWhenStarted {
+            mViewModel.getUserDataStateFlow().collect {
+                withContext(Dispatchers.Main) {
+                    when (it.status) {
+                        ResultResponse.Status.LOADING -> {
+                        }
+                        ResultResponse.Status.SUCCESS -> {
+                            val data = it.data as UserModel
+                            mBinding.data = data
+                        }
+                        ResultResponse.Status.ERROR -> {
+                        }
+                        else -> {
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     override fun onClickItem(itemViewModel: Any, type: Int) {
