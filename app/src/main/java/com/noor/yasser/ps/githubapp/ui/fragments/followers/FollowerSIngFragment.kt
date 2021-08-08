@@ -8,7 +8,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.noor.yasser.ps.githubapp.R
 import com.noor.yasser.ps.githubapp.adapters.ViewPagerAdapter
 import com.noor.yasser.ps.githubapp.databinding.FragmentFollowerSIngBinding
+import com.noor.yasser.ps.githubapp.viewmodels.ProfileViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class FollowerSIngFragment : Fragment(R.layout.fragment_follower_s_ing) {
 
     private lateinit var mBinding: FragmentFollowerSIngBinding
@@ -16,11 +20,15 @@ class FollowerSIngFragment : Fragment(R.layout.fragment_follower_s_ing) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentFollowerSIngBinding.bind(requireView())
-
+        mViewModel.userFollowers("noor1yasser9")
+        mViewModel.userFollowing("noor1yasser9")
 
         initViewPage()
 
     }
+
+    @Inject
+    lateinit var mViewModel: ProfileViewModel
 
 
     private fun initViewPage() {

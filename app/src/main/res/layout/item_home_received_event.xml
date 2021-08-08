@@ -36,7 +36,7 @@
 			android:ellipsize="end"
 			android:gravity="start"
 			android:maxLines="2"
-			android:textColor="@color/primaryTextColor"
+			android:textColor="@color/white"
 			android:textSize="14sp"
 			app:layout_constraintBottom_toTopOf="@+id/tvEventTime"
 			app:layout_constraintEnd_toStartOf="@+id/ivEventType"
