@@ -82,13 +82,13 @@ class DetailsUserFragment : Fragment(), GenericAdapter.OnListItemViewClickListen
                             isLoading = true
                         }
                         ResultResponse.Status.SUCCESS -> {
-                            if (isLoading) {
+//                            if (isLoading) {
                                 userModel = it.data as UserModel
                                 mBinding.data = userModel
                                 mBundle.putString(USERNAME, userModel.login);
                                 dismiss()
                                 isLoading = false
-                            }
+//                            }
                         }
                         ResultResponse.Status.ERROR -> {
                             dismiss()

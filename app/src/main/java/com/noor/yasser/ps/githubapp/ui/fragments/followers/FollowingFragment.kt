@@ -51,6 +51,7 @@ class FollowingFragment : Fragment(), GenericAdapter.OnListItemViewClickListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mViewModel.userFollowing(requireArguments().getString(USERNAME)!!)
         mBinding.rcData.apply {
             adapter = mAdapter
             addItemDecoration(MemberItemDecoration())
@@ -66,11 +67,11 @@ class FollowingFragment : Fragment(), GenericAdapter.OnListItemViewClickListener
                             isLoading = true
                         }
                         ResultResponse.Status.SUCCESS -> {
-                            if (isLoading) {
+//                            if (isLoading) {
                                 mAdapter.data = it.data as List<FollowersItem>
                                 dismiss()
                                 isLoading = false
-                            }
+//                            }
                         }
                         ResultResponse.Status.ERROR -> {
                             dismiss()

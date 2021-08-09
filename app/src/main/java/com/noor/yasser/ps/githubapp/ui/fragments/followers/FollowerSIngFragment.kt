@@ -32,8 +32,12 @@ class FollowerSIngFragment : Fragment(R.layout.fragment_follower_s_ing) {
 
     private fun initViewPage() {
         val viewPagerAdapter = ViewPagerAdapter(requireActivity())
-        viewPagerAdapter.addFragment(FollowersFragment(), "Followers")
-        viewPagerAdapter.addFragment(FollowingFragment(), "Following")
+        val followers = FollowersFragment()
+        followers .arguments =  requireArguments()
+        viewPagerAdapter.addFragment(followers, "Followers")
+        val following = FollowingFragment()
+        following.arguments = requireArguments()
+        viewPagerAdapter.addFragment(following, "Following")
         mBinding.viewPager.adapter = viewPagerAdapter
 
 
@@ -51,10 +55,7 @@ class FollowerSIngFragment : Fragment(R.layout.fragment_follower_s_ing) {
             }
         }.attach()
         requireArguments().apply {
-
             mBinding.viewPager.setCurrentItem(this.getInt(POSITION_FOLLOWRES), true)
-            mViewModel.userFollowers(requireArguments().getString(USERNAME)!!)
-            mViewModel.userFollowing(requireArguments().getString(USERNAME)!!)
         }
     }
 

@@ -57,7 +57,7 @@ class LoginFragment : Fragment() {
                             getString(R.string.not_found),
                             Snackbar.LENGTH_LONG
                         ).show()
-                    loadingDialog!!.dismiss()
+                    loadingDialog?.dismiss()
                     loadingDialog = null
                 }
             }
