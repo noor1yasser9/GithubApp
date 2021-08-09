@@ -8,6 +8,8 @@
         <variable
             name="data"
             type="com.noor.yasser.ps.githubapp.model.UserModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -17,6 +19,7 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
@@ -24,7 +27,7 @@
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsingToolbarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleTextAppearance="@style/TransparentText"
@@ -32,7 +35,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/colorPrimary"
                     android:gravity="center"
@@ -87,10 +90,12 @@
                         android:text='@{data.bio??""}'
                         android:textColor="@color/white"
                         android:textSize="18sp"
+                        android:visibility="@{data.bio==null?View.GONE:View.VISIBLE}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageUser"
                         app:layout_constraintTop_toBottomOf="@+id/imageUser"
-                        tools:text="@string/long_text" />
+                        tools:text="@string/long_text"
+                        tools:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/imageView"
@@ -98,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_8"
                         android:src="@drawable/ic_earbuds"
-                        app:layout_constraintStart_toStartOf="@+id/bio"
+                        app:layout_constraintStart_toStartOf="@+id/imageUser"
                         app:layout_constraintTop_toBottomOf="@+id/bio"
                         app:tint="@color/primaryLightColor" />
 
@@ -111,7 +116,7 @@
                         android:layout_marginEnd="@dimen/margin_24"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text='@{data.blog??""}'
+                        android:text='@{data.blog==null || data.blog.isEmpty()?"":data.blog}'
                         android:textColor="@color/color_link"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -128,7 +133,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_8"
                         android:src="@drawable/ic_baseline_account"
-                        app:layout_constraintStart_toStartOf="@+id/bio"
+                        app:layout_constraintStart_toStartOf="@+id/imageUser"
                         app:layout_constraintTop_toBottomOf="@+id/imageView"
                         app:tint="@color/primaryLightColor" />
 
@@ -226,6 +231,13 @@
                         app:layout_constraintEnd_toEndOf="@+id/textView2"
                         app:layout_constraintStart_toStartOf="@+id/tvFollowing"
                         app:layout_constraintTop_toTopOf="@+id/tvFollowing" />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{data.blog==null||data.blog.isEmpty()?View.GONE:View.VISIBLE}"
+                        app:constraint_referenced_ids="imageView,link" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.Toolbar
@@ -236,7 +248,7 @@
                     android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
                     app:layout_collapseMode="pin"
                     app:layout_scrollFlags="scroll|enterAlways"
-                    app:title="@{data.name}"/>
+                    app:title="@{data.name}" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

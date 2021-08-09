@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.noor.yasser.ps.githubapp.ui.fragments.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -19,14 +19,21 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.noor.yasser.ps.githubapp.ui.fragments.ProfileFragment"
-        android:label="ProfileFragment" >
-        <action
-            android:id="@+id/action_nav_profile_to_followerSIngFragment"
-            app:destination="@id/followerSIngFragment" />
-    </fragment>
+        android:label="ProfileFragment"/>
     <fragment
         android:id="@+id/followerSIngFragment"
         android:name="com.noor.yasser.ps.githubapp.ui.fragments.followers.FollowerSIngFragment"
         android:label="FollowerSIngFragment" />
+    <fragment
+        android:id="@+id/detailsUserFragment"
+        android:name="com.noor.yasser.ps.githubapp.ui.fragments.DetailsUserFragment"
+        android:label="DetailsUserFragment" />
+
+    <action
+        android:id="@+id/action_to_detailUserFragment"
+        app:destination="@id/detailsUserFragment" />
+    <action
+        android:id="@+id/action_nav_profile_to_followerSIngFragment"
+        app:destination="@id/followerSIngFragment" />
 
 </navigation>
