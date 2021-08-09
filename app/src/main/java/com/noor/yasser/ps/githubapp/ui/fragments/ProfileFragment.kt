@@ -21,6 +21,7 @@ import com.noor.yasser.ps.githubapp.ui.dialogs.IndeterminateProgressDialog
 import com.noor.yasser.ps.githubapp.utils.MemberItemDecoration
 import com.noor.yasser.ps.githubapp.utils.POSITION_FOLLOWRES
 import com.noor.yasser.ps.githubapp.utils.ResultResponse
+import com.noor.yasser.ps.githubapp.utils.USERNAME
 import com.noor.yasser.ps.githubapp.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +31,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile),
-    GenericAdapter.OnListItemViewClickListener<Any> {
+    GenericAdapter.OnListItemViewClickListener<RepositoryItem> {
     @Inject
     lateinit var mViewModel: ProfileViewModel
 
@@ -63,11 +64,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
 
         mBinding.groupFollowers.setOnClickListener {
             mBundle.putInt(POSITION_FOLLOWRES, 1)
-            findNavController().navigate(R.id.action_nav_profile_to_followerSIngFragment,mBundle)
+            findNavController().navigate(R.id.action_nav_profile_to_followerSIngFragment, mBundle)
         }
         mBinding.groupFollowing.setOnClickListener {
             mBundle.putInt(POSITION_FOLLOWRES, 0)
-            findNavController().navigate(R.id.action_nav_profile_to_followerSIngFragment,mBundle)
+            findNavController().navigate(R.id.action_nav_profile_to_followerSIngFragment, mBundle)
         }
 
         lifecycleScope.launchWhenStarted {
@@ -75,12 +76,19 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
                 withContext(Dispatchers.Main) {
                     when (it.status) {
                         ResultResponse.Status.LOADING -> {
+                            loadingDialog = getInstance();
+                            if (!loadingDialog!!.isAdded)
+                                loadingDialog!!.show(requireActivity().supportFragmentManager, "a")
+
                         }
                         ResultResponse.Status.SUCCESS -> {
                             userModel = it.data as UserModel
                             mBinding.data = userModel
+                            mBundle.putString(USERNAME, userModel.login);
+                            dismiss()
                         }
                         ResultResponse.Status.ERROR -> {
+                            dismiss()
                         }
                         else -> {
                         }
@@ -94,11 +102,17 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
                 withContext(Dispatchers.Main) {
                     when (it.status) {
                         ResultResponse.Status.LOADING -> {
+                            loadingDialog = getInstance();
+                            if (!loadingDialog!!.isAdded)
+                                loadingDialog!!.show(requireActivity().supportFragmentManager, "a")
+
                         }
                         ResultResponse.Status.SUCCESS -> {
                             mAdapter.data = it.data as List<RepositoryItem>
+                            dismiss()
                         }
                         ResultResponse.Status.ERROR -> {
+                            dismiss()
                         }
                         else -> {
                         }
@@ -109,8 +123,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
 
     }
 
-    override fun onClickItem(itemViewModel: Any, type: Int) {
+    override fun onClickItem(itemViewModel: RepositoryItem, type: Int) {
+
+    }
+    private fun getInstance(): IndeterminateProgressDialog {
+        if (loadingDialog == null)
+            loadingDialog = IndeterminateProgressDialog()
+        return loadingDialog!!;
     }
 
+    private fun dismiss() {
+        loadingDialog?.dismiss()
+        loadingDialog = null
+    }
 
 }

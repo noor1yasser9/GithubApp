@@ -9,6 +9,7 @@ import com.noor.yasser.ps.githubapp.R
 import com.noor.yasser.ps.githubapp.adapters.ViewPagerAdapter
 import com.noor.yasser.ps.githubapp.databinding.FragmentFollowerSIngBinding
 import com.noor.yasser.ps.githubapp.utils.POSITION_FOLLOWRES
+import com.noor.yasser.ps.githubapp.utils.USERNAME
 import com.noor.yasser.ps.githubapp.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -36,6 +37,7 @@ class FollowerSIngFragment : Fragment(R.layout.fragment_follower_s_ing) {
         mBinding.viewPager.adapter = viewPagerAdapter
 
 
+
         TabLayoutMediator(
             mBinding.tableLayout, mBinding.viewPager
         ) { tab: TabLayout.Tab, position: Int ->
@@ -49,7 +51,10 @@ class FollowerSIngFragment : Fragment(R.layout.fragment_follower_s_ing) {
             }
         }.attach()
         requireArguments().apply {
+
             mBinding.viewPager.setCurrentItem(this.getInt(POSITION_FOLLOWRES), true)
+            mViewModel.userFollowers(requireArguments().getString(USERNAME)!!)
+            mViewModel.userFollowing(requireArguments().getString(USERNAME)!!)
         }
     }
 

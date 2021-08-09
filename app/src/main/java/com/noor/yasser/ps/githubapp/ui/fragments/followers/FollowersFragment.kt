@@ -17,7 +17,9 @@ import com.noor.yasser.ps.githubapp.model.UserModel
 import com.noor.yasser.ps.githubapp.ui.dialogs.IndeterminateProgressDialog
 import com.noor.yasser.ps.githubapp.utils.MemberItemDecoration
 import com.noor.yasser.ps.githubapp.utils.ResultResponse
+import com.noor.yasser.ps.githubapp.utils.USERNAME
 import com.noor.yasser.ps.githubapp.viewmodels.ProfileViewModel
+import com.noor.yasser.ps.githubapp.viewmodels.UserDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -25,9 +27,12 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FollowersFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<Any> {
+class FollowersFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<FollowersItem> {
     @Inject
     lateinit var mViewModel: ProfileViewModel
+
+    @Inject
+    lateinit var mUserViewModel: UserDetailsViewModel
 
 
     private val mBinding by lazy {
@@ -39,6 +44,9 @@ class FollowersFragment : Fragment(), GenericAdapter.OnListItemViewClickListener
     }
     private var loadingDialog: IndeterminateProgressDialog? = null
 
+
+    private var isLoading = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,7 +55,6 @@ class FollowersFragment : Fragment(), GenericAdapter.OnListItemViewClickListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         mBinding.rcData.apply {
             adapter = mAdapter
             addItemDecoration(MemberItemDecoration())
@@ -60,10 +67,14 @@ class FollowersFragment : Fragment(), GenericAdapter.OnListItemViewClickListener
                             loadingDialog = getInstance();
                             if (!loadingDialog!!.isAdded)
                                 loadingDialog!!.show(requireActivity().supportFragmentManager, "a")
+                            isLoading = true
                         }
                         ResultResponse.Status.SUCCESS -> {
-                            mAdapter.data = it.data as List<FollowersItem>
-                            dismiss()
+                            if (isLoading) {
+                                mAdapter.data = it.data as List<FollowersItem>
+                                dismiss()
+                                isLoading = false
+                            }
                         }
                         ResultResponse.Status.ERROR -> {
                             dismiss()
@@ -79,8 +90,18 @@ class FollowersFragment : Fragment(), GenericAdapter.OnListItemViewClickListener
 
     }
 
-    override fun onClickItem(itemViewModel: Any, type: Int) {
+    override fun onClickItem(itemViewModel: FollowersItem, type: Int) {
+        val data = Bundle()
+        data.putString(USERNAME, itemViewModel.login)
+        mUserViewModel.detailUser(username = itemViewModel.login) {
+            lifecycleScope.launchWhenStarted {
+                findNavController().navigate(R.id.action_to_detailUserFragment, data)
+            }
+
+        }
+
     }
+
 
     private fun getInstance(): IndeterminateProgressDialog {
         if (loadingDialog == null)
@@ -88,7 +109,7 @@ class FollowersFragment : Fragment(), GenericAdapter.OnListItemViewClickListener
         return loadingDialog!!;
     }
 
-    private fun dismiss(){
+    private fun dismiss() {
         loadingDialog?.dismiss()
         loadingDialog = null
     }
