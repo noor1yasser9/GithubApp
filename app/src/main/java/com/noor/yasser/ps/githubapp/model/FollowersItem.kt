@@ -1,8 +1,11 @@
 package com.noor.yasser.ps.githubapp.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class FollowersItem(
     @SerializedName("avatar_url")
     var avatarUrl: String,
@@ -40,4 +43,4 @@ data class FollowersItem(
     var type: String,
     @SerializedName("url")
     var url: String
-)
+) : Parcelable

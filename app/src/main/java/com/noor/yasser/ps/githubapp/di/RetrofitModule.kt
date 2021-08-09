@@ -4,6 +4,7 @@ package com.noor.yasser.ps.githubapp.di
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.noor.yasser.ps.githubapp.network.DataProfileInterface
+import com.noor.yasser.ps.githubapp.network.DataUserInterface
 import com.noor.yasser.ps.githubapp.utils.*
 import dagger.Module
 import dagger.Provides
@@ -20,11 +21,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
-
-
-
-
-
 
 
     @Provides
@@ -47,9 +43,12 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun providesApiKey(): Interceptor = Interceptor { chain ->
-        chain.proceed( chain.request().newBuilder()
-            .header(KET_AUTH, VALUE_AUTH)
-            .build())
+        chain.proceed(
+            chain.request().newBuilder()
+//                .header(KET_AUTH, VALUE_AUTH)
+//                .header(CONTENT_TYPE, TYPE_VALUE)
+                .build()
+        )
     }
 
     @Provides
@@ -83,4 +82,9 @@ object RetrofitModule {
     @Singleton
     fun dataInterface(retrofit: Retrofit) =
         retrofit.create(DataProfileInterface::class.java)
+
+    @Provides
+    @Singleton
+    fun dataUserInterface(retrofit: Retrofit) =
+        retrofit.create(DataUserInterface::class.java)
 }
