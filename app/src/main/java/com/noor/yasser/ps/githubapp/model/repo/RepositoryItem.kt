@@ -1,8 +1,11 @@
 package com.noor.yasser.ps.githubapp.model.repo
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity
 data class RepositoryItem(
     @SerializedName("archive_url")
     var archiveUrl: String,
@@ -150,4 +153,7 @@ data class RepositoryItem(
     var watchers: Int,
     @SerializedName("watchers_count")
     var watchersCount: Int
-)
+) {
+    @PrimaryKey
+    var ids: Long = -1
+}

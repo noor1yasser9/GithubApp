@@ -15,16 +15,19 @@
         android:gravity="center_horizontal">
 
 
-        <ImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/icGithub"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:src="@mipmap/ic_github"
+            android:layout_width="@dimen/toolbarLogoSize"
+            android:layout_height="@dimen/toolbarLogoSize"
+            android:layout_marginStart="@dimen/margin_8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.22000003"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/logo"
             app:tint="@color/white" />
 
         <TextView
@@ -46,8 +49,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_32"
-            app:boxStrokeColor="@color/box_input_text_color"
             android:textColorHint="@color/secondaryLightColor"
+            app:boxStrokeColor="@color/box_input_text_color"
             app:hintTextColor="@color/box_input_text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,12 +62,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Username..."
-                android:textColorHint="@color/secondaryLightColor"
                 android:imeOptions="actionSend"
                 android:maxLength="50"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/secondaryLightColor" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -72,9 +75,9 @@
             android:id="@+id/mBtnSignIn"
             android:layout_width="0dp"
             android:layout_height="70dp"
-            android:text="@string/login_sign_in"
-            android:backgroundTint="@color/dark_pri_100"
             android:layout_marginTop="@dimen/margin_32"
+            android:backgroundTint="@color/dark_pri_100"
+            android:text="@string/login_sign_in"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp"

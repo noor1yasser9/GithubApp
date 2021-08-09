@@ -15,4 +15,7 @@
     <string name="long_text"><![CDATA[Masterful Mobile Developer 💥 & UI|UX Designer 🚀 | Kotlin 💥 | Java ⚡ | Dart 🌟]]></string>
     <string name="filed_is_required">Field is Required</string>
     <string name="not_found">Not Found Username</string>
+
+    <string name="transition_from_home_to_search" translatable="false">transitionFromHomeToSearch</string>
+
 </resources>

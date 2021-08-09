@@ -48,4 +48,7 @@
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="toolbarLogoSize">60dp</dimen>
+    <dimen name="toolbarLogoPadding">16</dimen>
 </resources>

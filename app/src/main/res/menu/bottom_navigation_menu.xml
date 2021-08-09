@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_baseline_star"
         android:title="@string/start" />
-    <item
-        android:id="@+id/nav_repos"
-        android:icon="@mipmap/ic_home_search"
-        android:title="@string/main_nav_repos" />
+
     <item
         android:id="@+id/profileFragment"
         android:icon="@mipmap/ic_nav_mine"

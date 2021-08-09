@@ -15,11 +15,15 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.noor.yasser.ps.githubapp.ui.fragments.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.noor.yasser.ps.githubapp.ui.fragments.ProfileFragment"
-        android:label="ProfileFragment"/>
+        android:label="ProfileFragment" />
     <fragment
         android:id="@+id/followerSIngFragment"
         android:name="com.noor.yasser.ps.githubapp.ui.fragments.followers.FollowerSIngFragment"
@@ -35,5 +39,9 @@
     <action
         android:id="@+id/action_nav_profile_to_followerSIngFragment"
         app:destination="@id/followerSIngFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.noor.yasser.ps.githubapp.ui.fragments.SearchFragment"
+        android:label="SearchFragment" />
 
 </navigation>
