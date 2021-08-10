@@ -35,9 +35,9 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="8dp"
                     android:src="@drawable/ic_baseline_arrow_back_24"
-                    app:layout_constraintBottom_toBottomOf="@id/searchView"
+                    app:layout_constraintBottom_toBottomOf="@+id/searchView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_conKstraintTop_toTopOf="@id/searchView" />
+                    app:layout_constraintTop_toTopOf="@+id/searchView" />
 
 
                 <androidx.appcompat.widget.SearchView

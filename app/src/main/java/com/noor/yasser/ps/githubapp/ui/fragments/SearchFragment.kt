@@ -20,7 +20,9 @@ import com.noor.yasser.ps.githubapp.model.search.SearchRequest
 import com.noor.yasser.ps.githubapp.ui.dialogs.IndeterminateProgressDialog
 import com.noor.yasser.ps.githubapp.utils.MemberItemDecoration
 import com.noor.yasser.ps.githubapp.utils.ResultResponse
+import com.noor.yasser.ps.githubapp.utils.USERNAME
 import com.noor.yasser.ps.githubapp.viewmodels.SearchViewModel
+import com.noor.yasser.ps.githubapp.viewmodels.UserDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -29,7 +31,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<FollowersItem> {
-
+    @Inject
+    lateinit var mUserViewModel: UserDetailsViewModel
     @Inject
     lateinit var mViewModel: SearchViewModel
     private var loadingDialog: IndeterminateProgressDialog? = null
@@ -134,6 +137,13 @@ class SearchFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<Fo
     }
 
     override fun onClickItem(itemViewModel: FollowersItem, type: Int) {
+        val data = Bundle()
+        data.putString(USERNAME, itemViewModel.login)
+        mUserViewModel.detailUser(username = itemViewModel.login) {
+            lifecycleScope.launchWhenStarted {
+                findNavController().navigate(R.id.action_to_detailUserFragment, data)
+            }
 
+        }
     }
 }
