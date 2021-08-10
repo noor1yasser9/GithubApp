@@ -1,6 +1,6 @@
 package com.noor.yasser.ps.githubapp.repositories
 
-import com.noor.yasser.ps.githubapp.network.DataProfileInterface
+import com.noor.yasser.ps.githubapp.network.DataInterface
 import com.noor.yasser.ps.githubapp.utils.ResultResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,21 +12,22 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DataProfileRepository @Inject constructor(val dataInterface: DataProfileInterface) {
+class DataProfileRepository @Inject constructor(val dataInterface: DataInterface) {
 
     private val userDataMutableStateFlow: MutableStateFlow<ResultResponse<Any>> =
         MutableStateFlow(ResultResponse.loading(""))
 
     private val userFollowersMutableStateFlow: MutableStateFlow<ResultResponse<Any>> =
-        MutableStateFlow(ResultResponse.loading(""))
+        MutableStateFlow(ResultResponse.empty(""))
     private val userFollowingMutableStateFlow: MutableStateFlow<ResultResponse<Any>> =
-        MutableStateFlow(ResultResponse.loading(""))
+        MutableStateFlow(ResultResponse.empty(""))
     private val userRepoMutableStateFlow: MutableStateFlow<ResultResponse<Any>> =
-        MutableStateFlow(ResultResponse.loading(""))
+        MutableStateFlow(ResultResponse.empty(""))
 
 
     fun detailUser(username: String, isExists: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
+            userDataMutableStateFlow.emit(ResultResponse.loading("loading"))
             try {
                 val response = dataInterface.detailUser(username)
                 if (response.isSuccessful) {
@@ -62,6 +63,7 @@ class DataProfileRepository @Inject constructor(val dataInterface: DataProfileIn
 
     fun userFollowers(username: String) {
         CoroutineScope(Dispatchers.IO).launch {
+            userFollowersMutableStateFlow.emit(ResultResponse.loading("loading"))
             try {
                 val response = dataInterface.userFollowers(username)
                 if (response.isSuccessful) {
@@ -88,6 +90,7 @@ class DataProfileRepository @Inject constructor(val dataInterface: DataProfileIn
 
     fun userFollowing(username: String) {
         CoroutineScope(Dispatchers.IO).launch {
+            userFollowingMutableStateFlow.emit(ResultResponse.loading("loading"))
             try {
                 val response = dataInterface.userFollowing(username)
                 if (response.isSuccessful) {
@@ -114,6 +117,7 @@ class DataProfileRepository @Inject constructor(val dataInterface: DataProfileIn
 
     fun userRepo(username: String) {
         CoroutineScope(Dispatchers.IO).launch {
+            userRepoMutableStateFlow.emit(ResultResponse.loading("loading"))
             try {
                 val response = dataInterface.userRepo(username)
                 if (response.isSuccessful) {

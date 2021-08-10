@@ -3,7 +3,7 @@ package com.noor.yasser.ps.githubapp.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.noor.yasser.ps.githubapp.network.DataProfileInterface
+import com.noor.yasser.ps.githubapp.network.DataInterface
 import com.noor.yasser.ps.githubapp.utils.*
 import dagger.Module
 import dagger.Provides
@@ -80,7 +80,7 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun dataInterface(retrofit: Retrofit) =
-        retrofit.create(DataProfileInterface::class.java)
+        retrofit.create(DataInterface::class.java)
 
 
 }

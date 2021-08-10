@@ -11,7 +11,7 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface DataProfileInterface {
+interface DataInterface {
 
     @GET("/users/{username}")
     suspend fun detailUser(@Path("username") username: String): Response<UserModel>
