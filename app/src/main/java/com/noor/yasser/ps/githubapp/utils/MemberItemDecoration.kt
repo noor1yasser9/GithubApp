@@ -20,7 +20,7 @@ class MemberItemDecoration : RecyclerView.ItemDecoration() {
         if (parent.getChildAdapterPosition(view) == 0) {
             val px = TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                30f,
+                10f,
                 parent.context.resources.displayMetrics
             ).toInt()
             outRect.top = px /* set your margin here */

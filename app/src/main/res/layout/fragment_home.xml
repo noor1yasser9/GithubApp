@@ -41,7 +41,7 @@
                     android:layout_marginEnd="@dimen/margin_16"
                     android:backgroundTint="@null"
                     android:transitionName="@string/transition_from_home_to_search"
-                    app:cardBackgroundColor="@color/material_color_grey_800"
+                    app:cardBackgroundColor="@color/dark_pri_100"
                     app:cardCornerRadius="@dimen/margin_8"
                     app:cardElevation="1dp"
                     app:cardUseCompatPadding="true">
