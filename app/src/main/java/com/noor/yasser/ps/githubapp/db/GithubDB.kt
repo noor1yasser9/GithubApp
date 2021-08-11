@@ -9,5 +9,5 @@ import com.noor.yasser.ps.githubapp.model.repo.RepositoryItem
 @Database(entities = [RepositoryItem::class], version = 7, exportSchema = false)
 abstract class GithubDB : RoomDatabase() {
 
-    abstract fun gethubDAO(): GithubDAO
+    abstract fun githubDAO(): GithubDAO
 }
