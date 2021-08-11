@@ -1,6 +1,7 @@
 package com.noor.yasser.ps.githubapp.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -83,11 +84,11 @@ class DetailsUserFragment : Fragment(), GenericAdapter.OnListItemViewClickListen
                         }
                         ResultResponse.Status.SUCCESS -> {
 //                            if (isLoading) {
-                                userModel = it.data as UserModel
-                                mBinding.data = userModel
-                                mBundle.putString(USERNAME, userModel.login);
-                                dismiss()
-                                isLoading = false
+                            userModel = it.data as UserModel
+                            mBinding.data = userModel
+                            mBundle.putString(USERNAME, userModel.login);
+                            dismiss()
+                            isLoading = false
 //                            }
                         }
                         ResultResponse.Status.ERROR -> {
@@ -133,6 +134,7 @@ class DetailsUserFragment : Fragment(), GenericAdapter.OnListItemViewClickListen
     override fun onDestroy() {
         bundle?.let {
             it.getString(USERNAME)?.let {
+                Log.e("ttttttttttt", it)
                 mViewModel.detailUser(it) {}
                 mUViewModel.userFollowers(it)
                 mUViewModel.userFollowing(it)
