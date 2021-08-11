@@ -1,8 +1,10 @@
 package com.noor.yasser.ps.githubapp.model
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-
+@Entity
 data class UserModel(
     @SerializedName("avatar_url")
     var avatarUrl: String?,
@@ -69,4 +71,7 @@ data class UserModel(
     @SerializedName("url")
     var url: String?,
     var message:String?
-)
+){
+    @PrimaryKey
+    var ids: Long = -1
+}
