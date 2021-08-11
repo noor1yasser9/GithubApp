@@ -2,9 +2,11 @@ package com.noor.yasser.ps.githubapp.model
 
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-
+@Entity
 @Parcelize
 data class FollowersItem(
     @SerializedName("avatar_url")
@@ -43,4 +45,8 @@ data class FollowersItem(
     var type: String,
     @SerializedName("url")
     var url: String
-) : Parcelable
+) : Parcelable{
+
+    @PrimaryKey
+    var ids: Long = -1
+}
