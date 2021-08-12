@@ -1,21 +1,21 @@
 package com.noor.yasser.ps.githubapp.db
 
 import androidx.room.*
+import com.noor.yasser.ps.githubapp.model.repo.RepositoryItem
 
 @Dao
 interface GithubDAO {
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insertMovie(resultMovie: ResultMovie): Long
-//
-//    @Query("SELECT * FROM ResultMovie")
-//    suspend fun getAllMovie(): List<ResultMovie>
-//
-//
-//    @Query("DELETE FROM ResultMovie WHERE id = :id")
-//    suspend fun deleteMovie(id: Int)
-//
-//    @Query("SELECT EXISTS (SELECT 1 FROM ResultMovie WHERE id = :id)")
-//    fun exists(id: Int): Boolean
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertRepository(result: RepositoryItem): Long
+
+    @Query("SELECT * FROM RepositoryItem")
+    suspend fun getAllRepository(): List<RepositoryItem>
+
+    @Query("DELETE FROM RepositoryItem WHERE id = :id")
+    suspend fun deleteRepository(id: Int)
+
+    @Query("SELECT EXISTS (SELECT 1 FROM RepositoryItem WHERE id = :id)")
+    fun exists(id: Int): Boolean
 
 }
