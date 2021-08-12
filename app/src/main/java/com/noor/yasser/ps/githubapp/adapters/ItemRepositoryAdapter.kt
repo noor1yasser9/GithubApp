@@ -2,6 +2,7 @@ package com.noor.yasser.ps.githubapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -21,9 +22,10 @@ class ItemRepositoryAdapter(val itemclick: OnListItemViewClickListener) :
             mBinding.root.setOnClickListener {
                 itemclick.onClickItem(data, 1)
             }
-
+            itemclick.onChangeColorInserted(mBinding.ivStarRoom, data)
             mBinding.ivStarRoom.setOnClickListener {
                 itemclick.onClickStart(data)
+                itemclick.onChangeColorInserted(mBinding.ivStarRoom, data)
             }
         }
     }
@@ -48,6 +50,7 @@ class ItemRepositoryAdapter(val itemclick: OnListItemViewClickListener) :
     interface OnListItemViewClickListener {
         fun onClickItem(itemViewModel: RepositoryItem, type: Int)
         fun onClickStart(item: RepositoryItem)
+        fun onChangeColorInserted(imageView: ImageView, item: RepositoryItem)
     }
 
     val diffCallback = object : DiffUtil.ItemCallback<RepositoryItem>() {

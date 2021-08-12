@@ -12,13 +12,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataBaseModule {
+object DatabaseModule {
 
     @Provides
     @Singleton
     fun provideDB(application: Application): GithubDB {
         return Room
-            .databaseBuilder(application, GithubDB::class.java, "github")
+            .databaseBuilder(application, GithubDB::class.java, "github4.db")
             .build()
     }
 
