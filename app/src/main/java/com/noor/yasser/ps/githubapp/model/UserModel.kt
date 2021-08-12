@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 @Entity
-data class UserModel(
+data class UserModel constructor(
     @SerializedName("avatar_url")
     var avatarUrl: String?,
     @SerializedName("bio")
@@ -13,11 +13,11 @@ data class UserModel(
     @SerializedName("blog")
     var blog: String?,
     @SerializedName("company")
-    var company: Any?,
+    var company: String?,
     @SerializedName("created_at")
     var createdAt: String?,
     @SerializedName("email")
-    var email: Any?,
+    var email: String?,
     @SerializedName("events_url")
     var eventsUrl: String?,
     @SerializedName("followers")
@@ -72,6 +72,6 @@ data class UserModel(
     var url: String?,
     var message:String?
 ){
-    @PrimaryKey
-    var ids: Long = -1
+    @PrimaryKey(autoGenerate = true)
+    var idRoom: Int? = null
 }
