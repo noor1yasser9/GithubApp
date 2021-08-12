@@ -3,14 +3,21 @@ package com.noor.yasser.ps.githubapp.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.noor.yasser.ps.githubapp.model.repo.RepositoryItem
 import com.noor.yasser.ps.githubapp.repositories.DataProfileRepository
+import com.noor.yasser.ps.githubapp.repositories.DatabaseRepository
+import com.noor.yasser.ps.githubapp.utils.ResultResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     val dataProfileRepository: DataProfileRepository,
+    val databaseRepository: DatabaseRepository,
     application: Application
 ) : AndroidViewModel(application) {
 
@@ -32,6 +39,31 @@ class ProfileViewModel @Inject constructor(
             dataProfileRepository.userFollowing(username)
         }
     }
+
+    fun insertRepo(item: RepositoryItem) {
+        viewModelScope.launch {
+            databaseRepository.insertRepo(item)
+        }
+    }
+
+    fun getIfExists(id: Int) {
+        viewModelScope.launch {
+            databaseRepository.getIfExists(id)
+        }
+    }
+
+
+    fun getRepoInsertLiveData(): StateFlow<ResultResponse<Any>> =
+        databaseRepository.getRepoInsertLiveData()
+
+    fun getRepoAllLiveData(): StateFlow<ResultResponse<Any>> =
+        databaseRepository.getRepoAllLiveData()
+
+    fun getRepoIsExistsLiveData(): StateFlow<ResultResponse<Any>> =
+        databaseRepository.getRepoIsExistsLiveData()
+
+    fun getRepoDeleteLiveData(): StateFlow<ResultResponse<Any>> =
+        databaseRepository.getRepoDeleteLiveData()
 
     fun getUserDataStateFlow() =
         dataProfileRepository.getUserDataStateFlow()

@@ -37,14 +37,14 @@
             android:id="@+id/tvRepoDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8"
             android:text='@{data.description==null?"":data.description}'
             android:textColor="@color/secondaryTextGray"
             android:textSize="12sp"
+            android:layout_marginTop="@dimen/margin_8"
             android:visibility="@{data.description==null?View.GONE:View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRepoName"
+            app:layout_constraintTop_toBottomOf="@+id/ivStarRoom"
             tools:text="The MVVM Architecture in Android（MVVM+Jetpack架构的Github）." />
 
         <ImageView

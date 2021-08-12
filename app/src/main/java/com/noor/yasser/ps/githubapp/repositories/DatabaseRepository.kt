@@ -1,5 +1,6 @@
 package com.noor.yasser.ps.githubapp.repositories
 
+import androidx.lifecycle.LiveData
 import com.noor.yasser.ps.githubapp.db.GithubDAO
 import com.noor.yasser.ps.githubapp.db.GithubDB
 import com.noor.yasser.ps.githubapp.model.repo.RepositoryItem
@@ -7,12 +8,14 @@ import com.noor.yasser.ps.githubapp.utils.ResultResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DatabaseRepository @Inject constructor(val githubDB: GithubDAO) {
+class DatabaseRepository @Inject constructor(
+    val githubDB: GithubDAO) {
 
     private val repoInsertLiveData: MutableStateFlow<ResultResponse<Any>> =
         MutableStateFlow(ResultResponse.empty(""))
@@ -23,7 +26,7 @@ class DatabaseRepository @Inject constructor(val githubDB: GithubDAO) {
     private val repoDeleteLiveData: MutableStateFlow<ResultResponse<Any>> =
         MutableStateFlow(ResultResponse.empty(""))
 
-    fun insertMovie(item: RepositoryItem) {
+    fun insertRepo(item: RepositoryItem) {
         CoroutineScope(Dispatchers.IO).launch {
             repoInsertLiveData.emit(ResultResponse.loading("loading"))
             val id = githubDB.insertRepository(item)
@@ -57,5 +60,11 @@ class DatabaseRepository @Inject constructor(val githubDB: GithubDAO) {
             repoDeleteLiveData.emit(ResultResponse.success(data))
         }
     }
+
+
+    fun  getRepoInsertLiveData():StateFlow<ResultResponse<Any>> = repoInsertLiveData;
+    fun  getRepoAllLiveData():StateFlow<ResultResponse<Any>> = repoAllLiveData;
+    fun  getRepoIsExistsLiveData():StateFlow<ResultResponse<Any>> = repoIsExistsLiveData;
+    fun  getRepoDeleteLiveData():StateFlow<ResultResponse<Any>> = repoDeleteLiveData;
 
 }
