@@ -138,7 +138,17 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivLanguageColor"
-            app:layout_constraintEnd_toEndOf="@+id/tvRepoDesc"
-            app:layout_constraintTop_toTopOf="@+id/ivLanguageColor" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivLanguageColor"
+            tools:text="Java" />
+
+        <ImageView
+            android:id="@+id/ivStarRoom"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_star_gray"
+            app:layout_constraintEnd_toEndOf="@+id/tvRepoName"
+            app:layout_constraintTop_toTopOf="@+id/tvRepoName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
