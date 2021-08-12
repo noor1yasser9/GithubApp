@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -135,6 +136,9 @@ class DetailsUserFragment : Fragment(), ItemRepositoryAdapter.OnListItemViewClic
 
     }
 
+    override fun onChangeColorInserted(imageView: ImageView,item: RepositoryItem) {
+
+    }
 
     override fun onDestroy() {
         bundle?.let {

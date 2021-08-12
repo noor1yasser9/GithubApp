@@ -1,9 +1,12 @@
 package com.noor.yasser.ps.githubapp.ui.fragments
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -41,7 +44,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
     }
 
     private val mAdapter by lazy {
-        ItemRepositoryAdapter( this)
+        ItemRepositoryAdapter(this)
     }
     private val mBundle by lazy { Bundle() }
 
@@ -129,7 +132,68 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
     }
 
     override fun onClickStart(item: RepositoryItem) {
-        TODO("Not yet implemented")
+        mViewModel.insertRepo(item)
+
+        lifecycleScope.launchWhenStarted {
+            mViewModel.getRepoInsertLiveData().collect {
+                withContext(Dispatchers.Main) {
+                    when (it.status) {
+                        ResultResponse.Status.LOADING -> {
+                            loadingDialog = getInstance();
+                            if (!loadingDialog!!.isAdded)
+                                loadingDialog!!.show(requireActivity().supportFragmentManager, "a")
+
+                        }
+                        ResultResponse.Status.SUCCESS -> {
+                            val data = it.data
+                            Log.e("tttttttttttt", data.toString())
+                            dismiss()
+                        }
+                        ResultResponse.Status.ERROR -> {
+                            dismiss()
+                        }
+                        else -> {
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onChangeColorInserted(imageView: ImageView, item: RepositoryItem) {
+        item.id?.let {
+
+            mViewModel.getIfExists(it)
+        }
+
+
+        lifecycleScope.launchWhenStarted {
+            mViewModel.getRepoIsExistsLiveData().collect {
+                withContext(Dispatchers.Main) {
+                    when (it.status) {
+                        ResultResponse.Status.LOADING -> {
+//                            loadingDialog = getInstance();
+//                            if (!loadingDialog!!.isAdded)
+//                                loadingDialog!!.show(requireActivity().supportFragmentManager, "a")
+
+                        }
+                        ResultResponse.Status.SUCCESS -> {
+                            val data = it.data as Boolean
+                            if (data)
+                                imageView.setImageResource(R.mipmap.ic_star_yellow_light)
+                            else
+                                imageView.setImageResource(R.mipmap.ic_star_gray)
+//                            dismiss()
+                        }
+                        ResultResponse.Status.ERROR -> {
+//                            dismiss()
+                        }
+                        else -> {
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun getInstance(): IndeterminateProgressDialog {
