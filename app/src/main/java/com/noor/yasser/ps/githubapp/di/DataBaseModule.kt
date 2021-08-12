@@ -25,7 +25,7 @@ object DataBaseModule {
     @Provides
     @Singleton
     fun provideDao(githubDB: GithubDB): GithubDAO {
-        return githubDB.gethubDAO()
+        return githubDB.githubDAO()
     }
 
 }
