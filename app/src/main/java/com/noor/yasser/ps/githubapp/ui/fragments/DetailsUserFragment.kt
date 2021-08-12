@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.noor.yasser.ps.githubapp.BR
 import com.noor.yasser.ps.githubapp.R
 import com.noor.yasser.ps.githubapp.adapters.GenericAdapter
+import com.noor.yasser.ps.githubapp.adapters.ItemRepositoryAdapter
 import com.noor.yasser.ps.githubapp.databinding.FragmentProfileBinding
 import com.noor.yasser.ps.githubapp.model.UserModel
 import com.noor.yasser.ps.githubapp.model.repo.RepositoryItem
@@ -28,7 +29,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DetailsUserFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<Any> {
+class DetailsUserFragment : Fragment(), ItemRepositoryAdapter.OnListItemViewClickListener {
     @Inject
     lateinit var mViewModel: UserDetailsViewModel
 
@@ -40,7 +41,7 @@ class DetailsUserFragment : Fragment(), GenericAdapter.OnListItemViewClickListen
     }
 
     private val mAdapter by lazy {
-        GenericAdapter(R.layout.item_repos_repo, BR.data, this)
+        ItemRepositoryAdapter(this)
     }
     private val mBundle by lazy { Bundle() }
 
@@ -126,7 +127,11 @@ class DetailsUserFragment : Fragment(), GenericAdapter.OnListItemViewClickListen
 
     }
 
-    override fun onClickItem(itemViewModel: Any, type: Int) {
+    override fun onClickItem(itemViewModel: RepositoryItem, type: Int) {
+
+    }
+
+    override fun onClickStart(item: RepositoryItem) {
 
     }
 

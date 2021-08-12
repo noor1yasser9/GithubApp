@@ -12,6 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.noor.yasser.ps.githubapp.BR
 import com.noor.yasser.ps.githubapp.R
 import com.noor.yasser.ps.githubapp.adapters.GenericAdapter
+import com.noor.yasser.ps.githubapp.adapters.ItemRepositoryAdapter
 import com.noor.yasser.ps.githubapp.adapters.ViewPagerAdapter
 import com.noor.yasser.ps.githubapp.databinding.FragmentProfileBinding
 import com.noor.yasser.ps.githubapp.model.FollowersItem
@@ -31,7 +32,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile),
-    GenericAdapter.OnListItemViewClickListener<RepositoryItem> {
+    ItemRepositoryAdapter.OnListItemViewClickListener {
     @Inject
     lateinit var mViewModel: ProfileViewModel
 
@@ -40,7 +41,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
     }
 
     private val mAdapter by lazy {
-        GenericAdapter(R.layout.item_repos_repo, BR.data, this)
+        ItemRepositoryAdapter( this)
     }
     private val mBundle by lazy { Bundle() }
 
@@ -126,6 +127,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
     override fun onClickItem(itemViewModel: RepositoryItem, type: Int) {
 
     }
+
+    override fun onClickStart(item: RepositoryItem) {
+        TODO("Not yet implemented")
+    }
+
     private fun getInstance(): IndeterminateProgressDialog {
         if (loadingDialog == null)
             loadingDialog = IndeterminateProgressDialog()
