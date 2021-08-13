@@ -17,7 +17,7 @@ class ItemRepositoryAdapter(val itemclick: OnListItemViewClickListener) :
 
     inner class ItemRepositoryViewHolder(val mBinding: ItemReposRepoBinding) :
         RecyclerView.ViewHolder(mBinding.root) {
-        fun onBind(data: RepositoryItem) {
+        fun onBind(data: RepositoryItem, position: Int) {
             mBinding.data = data;
             mBinding.root.setOnClickListener {
                 itemclick.onClickItem(data, 1)
@@ -25,6 +25,7 @@ class ItemRepositoryAdapter(val itemclick: OnListItemViewClickListener) :
             itemclick.onChangeColorInserted(mBinding.ivStarRoom, data)
             mBinding.ivStarRoom.setOnClickListener {
                 itemclick.onClickStart(data)
+                notifyItemChanged(position)
                 itemclick.onChangeColorInserted(mBinding.ivStarRoom, data)
             }
         }
@@ -42,7 +43,7 @@ class ItemRepositoryAdapter(val itemclick: OnListItemViewClickListener) :
     }
 
     override fun onBindViewHolder(holder: ItemRepositoryViewHolder, position: Int) {
-        holder.onBind(data = data[position])
+        holder.onBind(data = data[position], position)
     }
 
     override fun getItemCount() = data.size

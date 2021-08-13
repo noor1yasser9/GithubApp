@@ -1,5 +1,6 @@
 package com.noor.yasser.ps.githubapp.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.noor.yasser.ps.githubapp.db.GithubDAO
 import com.noor.yasser.ps.githubapp.db.GithubDB
@@ -15,7 +16,8 @@ import javax.inject.Singleton
 
 @Singleton
 class DatabaseRepository @Inject constructor(
-    val githubDB: GithubDAO) {
+    val githubDB: GithubDAO
+) {
 
     private val repoInsertLiveData: MutableStateFlow<ResultResponse<Any>> =
         MutableStateFlow(ResultResponse.empty(""))
@@ -41,15 +43,17 @@ class DatabaseRepository @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             repoAllLiveData.emit(ResultResponse.loading("loading"))
             val data = githubDB.getAllRepository()
+            Log.e("tttttttt","Loading")
             repoAllLiveData.emit(ResultResponse.success(data))
         }
     }
 
-    fun getIfExists(id: Int) {
+    fun getIfExists(id: Int, onComplete: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
-            repoIsExistsLiveData.emit(ResultResponse.loading("loading"))
+//            repoIsExistsLiveData.emit(ResultResponse.loading("loading"))
             val data = githubDB.exists(id)
-            repoIsExistsLiveData.emit(ResultResponse.success(data))
+            onComplete(data)
+//            repoIsExistsLiveData.emit(ResultResponse.success(data))
         }
     }
 
@@ -62,9 +66,9 @@ class DatabaseRepository @Inject constructor(
     }
 
 
-    fun  getRepoInsertLiveData():StateFlow<ResultResponse<Any>> = repoInsertLiveData;
-    fun  getRepoAllLiveData():StateFlow<ResultResponse<Any>> = repoAllLiveData;
-    fun  getRepoIsExistsLiveData():StateFlow<ResultResponse<Any>> = repoIsExistsLiveData;
-    fun  getRepoDeleteLiveData():StateFlow<ResultResponse<Any>> = repoDeleteLiveData;
+    fun getRepoInsertLiveData(): StateFlow<ResultResponse<Any>> = repoInsertLiveData;
+    fun getRepoAllLiveData(): StateFlow<ResultResponse<Any>> = repoAllLiveData;
+    fun getRepoIsExistsLiveData(): StateFlow<ResultResponse<Any>> = repoIsExistsLiveData;
+    fun getRepoDeleteLiveData(): StateFlow<ResultResponse<Any>> = repoDeleteLiveData;
 
 }
