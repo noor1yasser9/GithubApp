@@ -1,11 +1,16 @@
 <h1 align="center">Github App<br/>The MVVM arch using Coroutine and Android Jetpack.</h1>
-<h1 align = "center"><img src="https://user-images.githubusercontent.com/41232970/129375742-3c676245-ba98-4306-9415-dd62ae0e8534.gif"/></h1>
+<h1 align = "center"><img src="https://user-images.githubusercontent.com/41232970/129376874-f1f6c2d5-1345-4fe7-bc4b-eac1cad18252.gif"/></h1>
 
 This repo provides two `Mvvm` architecture implementation, see:
  
 * [Jetpack + Coroutine + Dagger-Hilt](https://github.com/qingmei2/MVVM-Architecture) 
 * [Jetpack + Coroutine + Kodein](https://github.com/qingmei2/MVVM-Architecture/tree/kodein_coroutine_livedata) 
  
+<p align="center"> 
+  Visitor count<br>
+  <img src="https://profile-counter.glitch.me/GithubAppNoor1yasser9/count.svg" />
+</p>
+<br/> 
 
 ## Screenshot
 ![ss](https://user-images.githubusercontent.com/41232970/129376139-516fc2d0-1e1e-42a5-98c1-0b468beff18c.png)
@@ -30,20 +35,34 @@ This repo provides two `Mvvm` architecture implementation, see:
 
 
 ## 📃 Libraries used
-*   [AndroidX](https://developer.android.com/jetpack/androidx/)
-*   [Dagger](https://github.com/google/dagger) 
-*   [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) 
-*   [Glide](https://github.com/bumptech/glide) 
-*   [Lottie](https://github.com/airbnb/lottie-android) 
-*   [Wang.avi](https://github.com/81813780/AVLoadingIndicatorView) 
-*   [Room](https://github.com/googlecodelabs/android-room-with-a-view) 
-*   [Shimmer](https://github.com/facebook/shimmer-android) 
-*   [Retrofit 2](https://github.com/square/retrofit) 
-*   [Gson](https://github.com/google/gson)
-*   [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
-*   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
-*   [DataBinding](https://developer.android.com/topic/libraries/data-binding/)
-*   [OkHttp](https://github.com/square/okhttp)
+
+### Android Jetpack
+* [Lifecycle: Create a UI that automatically responds to lifecycle events.](https://developer.android.com/topic/libraries/architecture/lifecycle)
+
+* [LiveData: Build data objects that notify views when the underlying database changes.](https://developer.android.com/topic/libraries/architecture/livedata)
+
+* [ViewModel: Store UI-related data that isn't destroyed on app rotations. Easily schedule asynchronous tasks for optimal execution.](https://developer.android.com/topic/libraries/architecture/viewmodel)
+
+* [Room: Access your app's SQLite database with in-app objects and compile-time checks.](https://developer.android.com/topic/libraries/architecture/room)
+
+* [Navigation: Handle everything needed for in-app navigation.](https://developer.android.com/topic/libraries/architecture/navigation/)
+
+### Http
+
+* [Retrofit2: Type-safe HTTP client for Android and Java by Square, Inc.](https://github.com/square/retrofit)
+
+* [OkHttp: An HTTP+HTTP/2 client for Android and Java applications.](https://github.com/square/okhttp)
+
+### DI
+* [Dagger-hilt: Dependency injection with Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
+
+### Others
+
+* [Glide: An image loading and caching library for Android focused on smooth scrolling](https://github.com/bumptech/glide)
+
+* [Timber: A logger with a small, extensible API which provides utility on top of Android's normal Log class.](https://github.com/JakeWharton/timber)
+
+* [Wang.avi](https://github.com/81813780/AVLoadingIndicatorView)  
 
 
 ## License
