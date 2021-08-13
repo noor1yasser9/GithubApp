@@ -1,5 +1,6 @@
 package com.noor.yasser.ps.githubapp.ui.dialogs;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,10 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import com.noor.yasser.ps.githubapp.databinding.DialogLoadingBinding;
-import org.jetbrains.annotations.NotNull;
 
+import com.noor.yasser.ps.githubapp.databinding.DialogLoadingBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 
 public class IndeterminateProgressDialog extends DialogFragment {
@@ -34,5 +36,11 @@ public class IndeterminateProgressDialog extends DialogFragment {
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT
         );
+    }
+
+    @Override
+    public void onDismiss(@NonNull @NotNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        onDestroy();
     }
 }
