@@ -46,16 +46,21 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun getIfExists(id: Int) {
+    fun deleteRepo(id: Int) {
         viewModelScope.launch {
-            databaseRepository.getIfExists(id)
+            databaseRepository.getDeleteRepo(id)
+        }
+    }
+
+    fun getIfExists(id: Int, onComplete: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            databaseRepository.getIfExists(id, onComplete)
         }
     }
 
 
     fun getRepoInsertLiveData(): StateFlow<ResultResponse<Any>> =
         databaseRepository.getRepoInsertLiveData()
-
 
 
     fun getRepoIsExistsLiveData(): StateFlow<ResultResponse<Any>> =

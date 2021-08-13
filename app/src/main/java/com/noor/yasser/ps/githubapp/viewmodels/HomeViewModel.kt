@@ -10,6 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Singleton
+
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -24,6 +26,12 @@ class HomeViewModel @Inject constructor(
 
     fun getRepoAllLiveData(): StateFlow<ResultResponse<Any>> =
         databaseRepository.getRepoAllLiveData()
+    fun deleteRepo(id: Int) {
+        viewModelScope.launch {
+            databaseRepository.getDeleteRepo(id)
+            getAllRepo()
+        }
+    }
 
     init {
         getAllRepo()
