@@ -16,6 +16,9 @@ This repo provides two `Mvvm` architecture implementation, see:
 ## Screenshot
 ![ss](https://user-images.githubusercontent.com/41232970/129376139-516fc2d0-1e1e-42a5-98c1-0b468beff18c.png)
 
+## 🕹 Sample Video
+<video src="https://user-images.githubusercontent.com/41232970/129381717-6d83574b-90a9-4fbb-a442-dc45fb127bde.mp4"></video>
+
 ## ✨ Features Project Android:
 - 100% Kotlin
 - Dagger Hilt
