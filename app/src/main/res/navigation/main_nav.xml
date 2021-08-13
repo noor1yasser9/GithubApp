@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav.xml"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -33,15 +33,38 @@
         android:name="com.noor.yasser.ps.githubapp.ui.fragments.DetailsUserFragment"
         android:label="DetailsUserFragment" />
 
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.noor.yasser.ps.githubapp.ui.fragments.SearchFragment"
+        android:label="SearchFragment" />
+    <dialog
+        android:id="@+id/webViewFragment"
+        android:name="com.noor.yasser.ps.githubapp.ui.dialogs.WebViewFragment"
+        android:label="WebViewFragment" />
+
     <action
         android:id="@+id/action_to_detailUserFragment"
         app:destination="@id/detailsUserFragment" />
     <action
         android:id="@+id/action_nav_profile_to_followerSIngFragment"
         app:destination="@id/followerSIngFragment" />
+    <action
+        android:id="@+id/openWebView"
+        app:destination="@+id/webViewFragment" />
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.noor.yasser.ps.githubapp.ui.fragments.SearchFragment"
-        android:label="SearchFragment" />
+        android:id="@+id/splashFragment"
+        android:name="com.noor.yasser.ps.githubapp.ui.fragments.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/main_nav.xml"
+            />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:popUpTo="@id/main_nav.xml"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 </navigation>
