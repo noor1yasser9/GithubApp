@@ -25,7 +25,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(),  ItemRepositoryAdapter.OnListItemViewClickListener {
+class HomeFragment : Fragment(), ItemRepositoryAdapter.OnListItemViewClickListener {
 
     private val mBinding by lazy {
         FragmentHomeBinding.inflate(layoutInflater)
@@ -55,7 +55,9 @@ class HomeFragment : Fragment(),  ItemRepositoryAdapter.OnListItemViewClickListe
             addItemDecoration(MemberItemDecoration())
         }
 
-
+        mBinding.mSwipeRefreshLayout.setOnRefreshListener {
+            mViewModel.getAllRepo()
+        }
         lifecycleScope.launchWhenStarted {
             mViewModel.getRepoAllLiveData().collect {
                 withContext(Dispatchers.Main) {
@@ -69,6 +71,7 @@ class HomeFragment : Fragment(),  ItemRepositoryAdapter.OnListItemViewClickListe
                         ResultResponse.Status.SUCCESS -> {
                             mAdapter.data = it.data as List<RepositoryItem>
                             dismiss()
+                            mBinding.mSwipeRefreshLayout.isRefreshing = false
                         }
                         ResultResponse.Status.ERROR -> {
                             dismiss()
@@ -106,10 +109,10 @@ class HomeFragment : Fragment(),  ItemRepositoryAdapter.OnListItemViewClickListe
     }
 
     override fun onClickItem(itemViewModel: RepositoryItem, type: Int) {
-
     }
 
     override fun onClickStart(item: RepositoryItem) {
+        mViewModel.deleteRepo(item.id!!)
 
     }
 
