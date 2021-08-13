@@ -56,8 +56,7 @@ class ProfileViewModel @Inject constructor(
     fun getRepoInsertLiveData(): StateFlow<ResultResponse<Any>> =
         databaseRepository.getRepoInsertLiveData()
 
-    fun getRepoAllLiveData(): StateFlow<ResultResponse<Any>> =
-        databaseRepository.getRepoAllLiveData()
+
 
     fun getRepoIsExistsLiveData(): StateFlow<ResultResponse<Any>> =
         databaseRepository.getRepoIsExistsLiveData()
