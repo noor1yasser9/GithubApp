@@ -2,7 +2,10 @@
 <h2 align="center">The MVVM arch using Coroutine, Daggar, and Android Jetpack.</h2>
 <h1 align = "center"><img src="https://user-images.githubusercontent.com/41232970/129378338-b71bc09f-b383-48e4-bb0f-b82d48c01909.png" width="300px"/></h1>
 
- 
+### This repo provides two Mvvm architecture implementation, see:
+* Jetpack + Coroutine + Dagger-Hilt
+* Jetpack + Coroutine + Kodein
+
 <p align="center"> 
   Visitor count<br>
   <img src="https://profile-counter.glitch.me/GithubAppNoor1yasser9/count.svg" />
