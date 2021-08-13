@@ -1,6 +1,6 @@
 <h1 align="center">Github App</h1>
 <h2 align="center">The MVVM arch using Coroutine, Daggar, and Android Jetpack.</h2>
-<h1 align = "center"><img src="https://user-images.githubusercontent.com/41232970/129377710-d639828b-f6d5-4454-ac82-be640a2043ca.gif"/></h1>
+<h1 align = "center"><img src="https://user-images.githubusercontent.com/41232970/129378338-b71bc09f-b383-48e4-bb0f-b82d48c01909.png"/></h1>
 
 This repo provides two `Mvvm` architecture implementation, see:
  
