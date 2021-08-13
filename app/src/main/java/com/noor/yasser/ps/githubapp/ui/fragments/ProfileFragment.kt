@@ -128,10 +128,24 @@ class ProfileFragment : Fragment(R.layout.fragment_profile),
             findNavController().navigate(R.id.openWebView, mBundle)
         }
 
+        mBinding.group.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putString(URL_DATA, userModel.blog)
+            findNavController().navigate(R.id.openWebView, mBundle)
+        }
+        mBinding.btnLink.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putString(URL_DATA, userModel.blog)
+            findNavController().navigate(R.id.openWebView, mBundle)
+        }
+
+
     }
 
-    override fun onClickItem(itemViewModel: RepositoryItem, type: Int) {
-
+    override fun onClickItem(item: RepositoryItem, type: Int) {
+        val mBundle = Bundle()
+        mBundle.putString(URL_DATA, item.htmlUrl)
+        findNavController().navigate(R.id.openWebView, mBundle)
     }
 
     override fun onClickStart(item: RepositoryItem) {

@@ -105,7 +105,7 @@
                         app:layout_constraintStart_toStartOf="@+id/imageUser"
                         app:layout_constraintTop_toBottomOf="@+id/imageUser"
                         tools:text="@string/long_text"
-                        tools:visibility="gone" />
+                    />
 
                     <ImageView
                         android:id="@+id/imageView"
@@ -146,6 +146,8 @@
                         app:layout_constraintStart_toStartOf="@+id/imageUser"
                         app:layout_constraintTop_toBottomOf="@+id/imageView"
                         app:tint="@color/primaryLightColor" />
+
+
 
                     <TextView
                         android:id="@+id/tvFollowers"
@@ -242,6 +244,16 @@
                         app:layout_constraintStart_toStartOf="@+id/tvFollowing"
                         app:layout_constraintTop_toTopOf="@+id/tvFollowing" />
 
+                    <Button
+                        android:id="@+id/btnLink"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:elevation="@dimen/elevation_2"
+                        android:background="@android:color/transparent"
+                        app:layout_constraintBottom_toBottomOf="@+id/link"
+                        app:layout_constraintEnd_toEndOf="@+id/link"
+                        app:layout_constraintStart_toStartOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/link" />
                     <androidx.constraintlayout.widget.Group
                         android:id="@+id/group"
                         android:layout_width="wrap_content"

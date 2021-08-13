@@ -17,10 +17,7 @@ import com.noor.yasser.ps.githubapp.databinding.FragmentProfileBinding
 import com.noor.yasser.ps.githubapp.model.UserModel
 import com.noor.yasser.ps.githubapp.model.repo.RepositoryItem
 import com.noor.yasser.ps.githubapp.ui.dialogs.IndeterminateProgressDialog
-import com.noor.yasser.ps.githubapp.utils.MemberItemDecoration
-import com.noor.yasser.ps.githubapp.utils.POSITION_FOLLOWRES
-import com.noor.yasser.ps.githubapp.utils.ResultResponse
-import com.noor.yasser.ps.githubapp.utils.USERNAME
+import com.noor.yasser.ps.githubapp.utils.*
 import com.noor.yasser.ps.githubapp.viewmodels.ProfileViewModel
 import com.noor.yasser.ps.githubapp.viewmodels.UserDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -85,13 +82,11 @@ class DetailsUserFragment : Fragment(), ItemRepositoryAdapter.OnListItemViewClic
                             isLoading = true
                         }
                         ResultResponse.Status.SUCCESS -> {
-//                            if (isLoading) {
                             userModel = it.data as UserModel
                             mBinding.data = userModel
                             mBundle.putString(USERNAME, userModel.login);
                             dismiss()
                             isLoading = false
-//                            }
                         }
                         ResultResponse.Status.ERROR -> {
                             dismiss()
@@ -101,6 +96,12 @@ class DetailsUserFragment : Fragment(), ItemRepositoryAdapter.OnListItemViewClic
                     }
                 }
             }
+        }
+
+        mBinding.btnGoToWeb.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putString(URL_DATA, userModel.htmlUrl)
+            findNavController().navigate(R.id.openWebView, mBundle)
         }
 
         lifecycleScope.launchWhenStarted {
@@ -125,25 +126,42 @@ class DetailsUserFragment : Fragment(), ItemRepositoryAdapter.OnListItemViewClic
                 }
             }
         }
-
+        mBinding.btnLink.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putString(URL_DATA, userModel.blog)
+            findNavController().navigate(R.id.openWebView, mBundle)
+        }
     }
 
-    override fun onClickItem(itemViewModel: RepositoryItem, type: Int) {
-
+    override fun onClickItem(item: RepositoryItem, type: Int) {
+        val mBundle = Bundle()
+        mBundle.putString(URL_DATA, item.htmlUrl)
+        findNavController().navigate(R.id.openWebView, mBundle)
     }
 
     override fun onClickStart(item: RepositoryItem) {
-
+        mUViewModel.getIfExists(item.id!!) {
+            if (!it)
+                mUViewModel.insertRepo(item)
+            else
+                mUViewModel.deleteRepo(item.id!!)
+        }
     }
 
-    override fun onChangeColorInserted(imageView: ImageView,item: RepositoryItem) {
-
+    override fun onChangeColorInserted(imageView: ImageView, item: RepositoryItem) {
+        item.id?.let {
+            mUViewModel.getIfExists(it) {
+                if (it)
+                    imageView.setImageResource(R.mipmap.ic_star_yellow_light)
+                else
+                    imageView.setImageResource(R.mipmap.ic_star_gray)
+            }
+        }
     }
 
     override fun onDestroy() {
         bundle?.let {
             it.getString(USERNAME)?.let {
-                Log.e("ttttttttttt", it)
                 mViewModel.detailUser(it) {}
                 mUViewModel.userFollowers(it)
                 mUViewModel.userFollowing(it)

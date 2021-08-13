@@ -72,11 +72,9 @@ class FollowersFragment : Fragment(), GenericAdapter.OnListItemViewClickListener
                             isLoading = true
                         }
                         ResultResponse.Status.SUCCESS -> {
-//                            if (isLoading) {
-                                mAdapter.data = it.data as List<FollowersItem>
-                                dismiss()
-                                isLoading = false
-//                            }
+                            mAdapter.data = it.data as List<FollowersItem>
+                            dismiss()
+                            isLoading = false
                         }
                         ResultResponse.Status.ERROR -> {
                             dismiss()
@@ -94,7 +92,7 @@ class FollowersFragment : Fragment(), GenericAdapter.OnListItemViewClickListener
 
     override fun onClickItem(itemViewModel: FollowersItem, type: Int) {
         val data = Bundle()
-        data.putString(USERNAME, itemViewModel.login)
+        data.putString(USERNAME, requireArguments().getString(USERNAME))
         mUserViewModel.detailUser(username = itemViewModel.login) {
             lifecycleScope.launchWhenStarted {
                 findNavController().navigate(R.id.action_to_detailUserFragment, data)

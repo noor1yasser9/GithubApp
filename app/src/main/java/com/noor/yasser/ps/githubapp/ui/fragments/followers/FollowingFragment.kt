@@ -87,7 +87,7 @@ class FollowingFragment : Fragment(), GenericAdapter.OnListItemViewClickListener
 
     override fun onClickItem(itemViewModel: FollowersItem, type: Int) {
         val data = Bundle()
-        data.putString(USERNAME, itemViewModel.login)
+//        data.putString(USERNAME, itemViewModel.login)
         mUserViewModel.detailUser(username = itemViewModel.login) {
             lifecycleScope.launchWhenStarted {
                 findNavController().navigate(R.id.action_to_detailUserFragment, data)

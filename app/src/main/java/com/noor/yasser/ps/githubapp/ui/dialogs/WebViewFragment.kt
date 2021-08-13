@@ -23,7 +23,9 @@ class WebViewFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = mBinding.root
+    ) = mBinding.root.apply {
+        isCancelable = false
+    }
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,11 +33,17 @@ class WebViewFragment : BottomSheetDialogFragment() {
         loadingDialog = getInstance();
         if (!loadingDialog!!.isAdded)
             loadingDialog!!.show(requireActivity().supportFragmentManager, "a")
+
+        mBinding.btnClose.setOnClickListener {
+            super.dismiss()
+        }
+
         arguments?.let {
             it.getString(URL_DATA)?.let { url ->
                 with(mBinding.webView) {
                     loadUrl(url)
                     settings.javaScriptEnabled = true
+                    settings.setNeedInitialFocus(true)
                     webViewClient = object : WebViewClient() {
                         override fun onPageFinished(view: WebView?, url: String?) {
                             super.onPageFinished(view, url)
@@ -59,6 +67,9 @@ class WebViewFragment : BottomSheetDialogFragment() {
     }
 
     override fun dismiss() {
-        super.dismiss()
+        if (mBinding.webView.canGoBack())
+            mBinding.webView.goBack()
+        else
+            super.dismiss()
     }
 }

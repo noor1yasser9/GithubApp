@@ -16,6 +16,7 @@ import com.noor.yasser.ps.githubapp.model.repo.RepositoryItem
 import com.noor.yasser.ps.githubapp.ui.dialogs.IndeterminateProgressDialog
 import com.noor.yasser.ps.githubapp.utils.MemberItemDecoration
 import com.noor.yasser.ps.githubapp.utils.ResultResponse
+import com.noor.yasser.ps.githubapp.utils.URL_DATA
 import com.noor.yasser.ps.githubapp.viewmodels.HomeViewModel
 import com.noor.yasser.ps.githubapp.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +34,6 @@ class HomeFragment : Fragment(), ItemRepositoryAdapter.OnListItemViewClickListen
 
     @Inject
     lateinit var mViewModel: HomeViewModel
-    private var loadingDialog: IndeterminateProgressDialog? = null
 
     private val mAdapter by lazy {
         ItemRepositoryAdapter(this)
@@ -48,7 +48,6 @@ class HomeFragment : Fragment(), ItemRepositoryAdapter.OnListItemViewClickListen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupClickListeners()
         mBinding.rcData.apply {
             adapter = mAdapter
@@ -63,18 +62,12 @@ class HomeFragment : Fragment(), ItemRepositoryAdapter.OnListItemViewClickListen
                 withContext(Dispatchers.Main) {
                     when (it.status) {
                         ResultResponse.Status.LOADING -> {
-                            loadingDialog = getInstance();
-                            if (!loadingDialog!!.isAdded)
-                                loadingDialog!!.show(requireActivity().supportFragmentManager, "a")
-
                         }
                         ResultResponse.Status.SUCCESS -> {
                             mAdapter.data = it.data as List<RepositoryItem>
-                            dismiss()
                             mBinding.mSwipeRefreshLayout.isRefreshing = false
                         }
                         ResultResponse.Status.ERROR -> {
-                            dismiss()
                         }
                         else -> {
                         }
@@ -97,18 +90,11 @@ class HomeFragment : Fragment(), ItemRepositoryAdapter.OnListItemViewClickListen
         }
     }
 
-    private fun getInstance(): IndeterminateProgressDialog {
-        if (loadingDialog == null)
-            loadingDialog = IndeterminateProgressDialog()
-        return loadingDialog!!;
-    }
 
-    private fun dismiss() {
-        loadingDialog?.dismiss()
-        loadingDialog = null
-    }
-
-    override fun onClickItem(itemViewModel: RepositoryItem, type: Int) {
+    override fun onClickItem(item: RepositoryItem, type: Int) {
+        val mBundle = Bundle()
+        mBundle.putString(URL_DATA, item.htmlUrl)
+        findNavController().navigate(R.id.openWebView, mBundle)
     }
 
     override fun onClickStart(item: RepositoryItem) {
