@@ -1,6 +1,14 @@
 <h1 align="center">Github App<br/>The MVVM arch using Coroutine and Android Jetpack.</h1>
-<h1 align = "center"><img src="https://user-images.githubusercontent.com/41232970/113998848-20d55180-9862-11eb-97b2-ebd9b5caa3f5.gif"/></h1>
+<h1 align = "center"><img src="https://user-images.githubusercontent.com/41232970/129375742-3c676245-ba98-4306-9415-dd62ae0e8534.gif"/></h1>
 
+This repo provides two `Mvvm` architecture implementation, see:
+ 
+* [Jetpack + Coroutine + Dagger-Hilt](https://github.com/qingmei2/MVVM-Architecture) 
+* [Jetpack + Coroutine + Kodein](https://github.com/qingmei2/MVVM-Architecture/tree/kodein_coroutine_livedata) 
+ 
+
+## Screenshot
+![ss](https://user-images.githubusercontent.com/41232970/129376139-516fc2d0-1e1e-42a5-98c1-0b468beff18c.png)
 
 ## ✨ Features Project Android:
 - 100% Kotlin
