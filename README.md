@@ -25,7 +25,8 @@ You can also check [**MVP**](https://github.com/ahmedeltaher/Android-MVP-Archite
 - Consider edge cases, leaks and how long-running operations can affect the instances in your architecture.
 - Don’t put logic in the ViewModel that is critical to saving clean state or related to data. Any call you make from a ViewModel can be the last one.
 
-
+  ![mvvm2](https://user-images.githubusercontent.com/1812129/68319008-e9d39d00-00bd-11ea-9245-ebedd2a2c067.png)
+  
 <p align="center"> 
   Visitor count<br>
   <img src="https://profile-counter.glitch.me/GithubAppNoor1yasser9/count.svg" />
