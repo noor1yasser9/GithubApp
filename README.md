@@ -11,6 +11,20 @@ GithubApp is a sample Android project using Github API based on MVVM architectur
 Model-View-ViewModel (ie MVVM) is a template of a client application architecture, proposed by John Gossman as an alternative to MVC and MVP patterns when using Data Binding technology. Its concept is to separate data presentation logic from business logic by moving it into particular class for a clear distinction.
 You can also check [**MVP**](https://github.com/ahmedeltaher/Android-MVP-Architecture)
 
+**Why Promoting MVVM VS MVP:**
+- ViewModel has Built in LifeCycleOwerness, on the other hand Presenter not, and you have to take this responsiblty in your side.
+- ViewModel doesn't have a reference for View, on the other hand Presenter still hold a reference for view, even if you made it as weakreference.
+- ViewModel survive configuration changes, while it is your own responsiblities to survive the configuration changes in case of Presenter. (Saving and restoring the UI state)
+
+**MVVM Best Pratice:**
+- Avoid references to Views in ViewModels.
+- Instead of pushing data to the UI, let the UI observe changes to it.
+- Distribute responsibilities, add a domain layer if needed.
+- Add a data repository as the single-point entry to your data.
+- Expose information about the state of your data using a wrapper or another LiveData.
+- Consider edge cases, leaks and how long-running operations can affect the instances in your architecture.
+- Don’t put logic in the ViewModel that is critical to saving clean state or related to data. Any call you make from a ViewModel can be the last one.
+
 
 <p align="center"> 
   Visitor count<br>
