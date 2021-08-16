@@ -2,11 +2,30 @@
 <h2 align="center">The MVVM arch using Coroutine, Daggar, and Android Jetpack.</h2>
 <h1 align = "center"><img src="https://user-images.githubusercontent.com/41232970/129378338-b71bc09f-b383-48e4-bb0f-b82d48c01909.png" width="300px"/></h1>
 
-This repo provides two `Mvvm` architecture implementation, see:
- 
-* [Jetpack + Coroutine + Dagger-Hilt](https://github.com/qingmei2/MVVM-Architecture) 
-* [Jetpack + Coroutine + Kodein](https://github.com/qingmei2/MVVM-Architecture/tree/kodein_coroutine_livedata) 
- 
+## Overview 
+GithubApp is a sample Android project using Github API based on MVVM architecture. It showcases the app development with well-designed architecture and up-to-date Android tech stacks.
+
+[![kotlin](https://img.shields.io/badge/Kotlin-1.4.xxx-brightgreen.svg)](https://kotlinlang.org/)  [![coroutines](https://img.shields.io/badge/coroutines-asynchronous-red.svg)](https://kotlinlang.org/docs/reference/coroutines-overview.html)  [![Dagger 2](https://img.shields.io/badge/Dagger-2.xx-orange.svg)](https://google.github.io/dagger/) [![Kotlin-Android-Extensions ](https://img.shields.io/badge/Kotlin--Android--Extensions-plugin-red.svg)](https://kotlinlang.org/docs/tutorials/android-plugin.html) [![MVVM ](https://img.shields.io/badge/Clean--Code-MVVM-brightgreen.svg)](https://github.com/googlesamples/android-architecture)
+
+Model-View-ViewModel (ie MVVM) is a template of a client application architecture, proposed by John Gossman as an alternative to MVC and MVP patterns when using Data Binding technology. Its concept is to separate data presentation logic from business logic by moving it into particular class for a clear distinction.
+You can also check [**MVP**](https://github.com/ahmedeltaher/Android-MVP-Architecture)
+
+**Why Promoting MVVM VS MVP:**
+- ViewModel has Built in LifeCycleOwerness, on the other hand Presenter not, and you have to take this responsiblty in your side.
+- ViewModel doesn't have a reference for View, on the other hand Presenter still hold a reference for view, even if you made it as weakreference.
+- ViewModel survive configuration changes, while it is your own responsiblities to survive the configuration changes in case of Presenter. (Saving and restoring the UI state)
+
+**MVVM Best Pratice:**
+- Avoid references to Views in ViewModels.
+- Instead of pushing data to the UI, let the UI observe changes to it.
+- Distribute responsibilities, add a domain layer if needed.
+- Add a data repository as the single-point entry to your data.
+- Expose information about the state of your data using a wrapper or another LiveData.
+- Consider edge cases, leaks and how long-running operations can affect the instances in your architecture.
+- Don’t put logic in the ViewModel that is critical to saving clean state or related to data. Any call you make from a ViewModel can be the last one.
+
+  ![mvvm2](https://user-images.githubusercontent.com/1812129/68319008-e9d39d00-00bd-11ea-9245-ebedd2a2c067.png)
+  
 <p align="center"> 
   Visitor count<br>
   <img src="https://profile-counter.glitch.me/GithubAppNoor1yasser9/count.svg" />
